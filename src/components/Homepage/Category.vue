@@ -79,6 +79,10 @@ export default {
     display: flex;
     align-items: center;
 
+    &:hover {
+      color: #d87d4a;
+    }
+
     &__icon {
       margin-left: 1.332rem;
     }

@@ -6,16 +6,18 @@
       <Category product="speakers" />
       <Category product="earphones" />
     </section>
+    <ZX9Preview />
   </main>
 </template>
 
 <script>
 import Header from "../components/Homepage/Header.vue";
-import Category from "../components/Homepage/Category";
+import Category from "../components/Homepage/Category.vue";
+import ZX9Preview from "../components/Homepage/ZX9Preview.vue";
 
 export default {
   name: "Home",
-  components: { Header, Category },
+  components: { Header, Category, ZX9Preview },
 };
 </script>
 
