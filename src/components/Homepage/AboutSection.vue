@@ -32,6 +32,7 @@ export default {
 
   &__image {
     width: 100%;
+    border-radius: 0.8rem;
   }
 
   &__heading {
