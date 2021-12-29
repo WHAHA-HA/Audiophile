@@ -9,6 +9,7 @@
     <ZX9Preview />
     <ZX7Preview />
     <YX1Preview />
+    <AboutSection />
   </main>
 </template>
 
@@ -18,10 +19,18 @@ import Category from "../components/Homepage/Category.vue";
 import ZX9Preview from "../components/Homepage/ZX9Preview.vue";
 import ZX7Preview from "../components/Homepage/ZX7Preview.vue";
 import YX1Preview from "../components/Homepage/YX1Preview.vue";
+import AboutSection from "../components/Homepage/AboutSection.vue";
 
 export default {
   name: "Home",
-  components: { Header, Category, ZX9Preview, ZX7Preview, YX1Preview },
+  components: {
+    Header,
+    Category,
+    ZX9Preview,
+    ZX7Preview,
+    YX1Preview,
+    AboutSection,
+  },
 };
 </script>
 
