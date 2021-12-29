@@ -7,6 +7,7 @@
       <Category product="earphones" />
     </section>
     <ZX9Preview />
+    <ZX7Preview />
   </main>
 </template>
 
@@ -14,10 +15,11 @@
 import Header from "../components/Homepage/Header.vue";
 import Category from "../components/Homepage/Category.vue";
 import ZX9Preview from "../components/Homepage/ZX9Preview.vue";
+import ZX7Preview from "../components/Homepage/ZX7Preview.vue";
 
 export default {
   name: "Home",
-  components: { Header, Category, ZX9Preview },
+  components: { Header, Category, ZX9Preview, ZX7Preview },
 };
 </script>
 
