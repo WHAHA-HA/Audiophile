@@ -44,6 +44,13 @@ export default {
 <style lang="scss" scoped>
 .categories {
   padding: 9.2rem 2.4rem 0 2.4rem;
+
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: center;
+    padding-top: 9.6rem 4rem 0 4rem;
+    padding: 9.6rem 4rem 0 4rem;
+  }
 }
 
 .wrapper {

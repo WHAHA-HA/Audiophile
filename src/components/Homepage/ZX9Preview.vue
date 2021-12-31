@@ -38,6 +38,10 @@ export default {
   flex-direction: column;
   align-items: center;
 
+  @media (min-width: 768px) {
+    margin-top: 9.6rem;
+  }
+
   * {
     text-align: center;
   }

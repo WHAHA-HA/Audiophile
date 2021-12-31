@@ -45,8 +45,20 @@ export default {
   flex-direction: column;
   align-items: center;
   background: #f1f1f1;
-  margin-bottom: 6.8rem;
+  margin: 0 auto 6.8rem auto;
   border-radius: 0.8rem;
+  max-width: 32.7rem;
+
+  @media (min-width: 768px) {
+    margin: 0;
+    margin-right: 1rem;
+    max-width: auto;
+    min-width: 22.3rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 
   &:last-child {
     margin-bottom: 0;
