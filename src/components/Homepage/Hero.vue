@@ -26,6 +26,10 @@ export default {
   align-items: center;
   padding: 10.8rem 2.3rem 11.2rem 2.3rem;
 
+  @media (min-width: 768px) {
+    padding: 12.6rem 19.5rem 16.7rem 19.5rem;
+  }
+
   * {
     text-align: center;
   }
@@ -46,6 +50,12 @@ export default {
     line-height: 4rem;
     letter-spacing: 0.129rem;
     margin: 1.6rem 0 2.4rem 0;
+
+    @media (min-width: 768px) {
+      font-size: 5.6rem;
+      line-height: 5.8rem;
+      letter-spacing: 0.2rem;
+    }
   }
 
   &__product-description {
