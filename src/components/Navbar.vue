@@ -24,6 +24,12 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 3.2rem 2.4rem;
+  position: relative;
+
+  @media (min-width: 768px) {
+    justify-content: flex-start;
+    padding: 3.7rem 4rem;
+  }
 
   button {
     border: none;
@@ -37,12 +43,21 @@ export default {
 
   &__homeLink {
     display: flex;
+
+    @media (min-width: 768px) {
+      margin-left: 4.2rem;
+    }
   }
 
   &__cart-btn {
     background: url("../assets/shared/desktop/icon-cart.svg");
     width: 2.3rem;
     height: 2rem;
+
+    @media (min-width: 768px) {
+      position: absolute;
+      right: 4rem;
+    }
   }
 }
 </style>

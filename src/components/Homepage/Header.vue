@@ -17,8 +17,14 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  background: url("../../assets/home/mobile/image-header.jpg");
+  background-image: url("../../assets/home/mobile/image-header.jpg");
   background-position: center;
   background-size: cover;
+
+  @media (min-width: 768px) {
+    background-image: url("../../assets/home/tablet/image-header.jpg");
+    background-position: center;
+    background-size: cover;
+  }
 }
 </style>
