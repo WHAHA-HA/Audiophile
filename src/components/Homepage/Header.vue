@@ -26,5 +26,11 @@ export default {
     background-position: center;
     background-size: cover;
   }
+
+  @media (min-width: 1205px) {
+    background-image: url("../../assets/home/desktop/image-hero.jpg");
+    background-size: cover;
+    background-position: center;
+  }
 }
 </style>
