@@ -5,18 +5,21 @@
       src="../../assets/shared/desktop/image-category-thumbnail-headphones.png"
       alt=""
       class="category__thumbnail"
+      id="headphones"
     />
     <img
       v-if="product === 'speakers'"
       src="../../assets/shared/desktop/image-category-thumbnail-speakers.png"
       alt=""
       class="category__thumbnail"
+      id="speakers"
     />
     <img
       v-if="product === 'earphones'"
       src="../../assets/shared/desktop/image-category-thumbnail-earphones.png"
       alt=""
       class="category__thumbnail"
+      id="earphones"
     />
     <h2 class="category__name">{{ product }}</h2>
     <router-link class="category__link" to="#">
@@ -60,8 +63,25 @@ export default {
     }
   }
 
+  @media (min-width: 1205px) {
+    margin-right: 3rem;
+    min-width: 35rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
   &:last-child {
     margin-bottom: 0;
+  }
+
+  & #speakers {
+    top: -4.6rem;
+  }
+
+  & #earphones {
+    top: -4rem;
   }
 
   &__thumbnail {
@@ -69,6 +89,10 @@ export default {
     position: relative;
     top: -5.2rem;
     margin-bottom: -5.2rem;
+
+    @media (min-width: 1205px) {
+      width: 17rem;
+    }
   }
 
   &__name {
@@ -77,6 +101,12 @@ export default {
     font-size: 1.5rem;
     line-height: 2.049rem;
     letter-spacing: 0.107rem;
+
+    @media (min-width: 1205px) {
+      font-size: 1.8rem;
+      line-height: 2.459rem;
+      letter-spacing: 0.129rem;
+    }
   }
 
   &__link {

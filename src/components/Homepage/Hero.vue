@@ -78,6 +78,7 @@ export default {
     @media (min-width: 1205px) {
       width: 37.9rem;
       margin-bottom: 4rem;
+      text-align: left;
     }
   }
 }

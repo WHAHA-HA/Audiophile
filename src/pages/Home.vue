@@ -48,8 +48,11 @@ export default {
   @media (min-width: 768px) {
     display: flex;
     justify-content: center;
-    padding-top: 9.6rem 4rem 0 4rem;
     padding: 9.6rem 4rem 0 4rem;
+  }
+
+  @media (min-width: 1205px) {
+    padding: 12rem 16.5rem 0 16.5rem;
   }
 }
 
