@@ -21,6 +21,8 @@ export default { name: "ZX7Preview" };
   @media (min-width: 768px) {
     background: url("../../assets/home/tablet/image-speaker-zx7.jpg");
     padding: 10.1rem 0 10.1rem 6.2rem;
+    background-size: cover;
+    background-position: center;
   }
 
   &__header {
