@@ -1,10 +1,6 @@
 <template>
   <section class="about">
-    <img
-      src="../../assets/shared/mobile/image-best-gear.jpg"
-      alt="man listening to music in headphones"
-      class="about__image"
-    />
+    <div class="about__image"></div>
     <h2 class="about__heading">
       Bringing you the <span>best</span> audio gear
     </h2>
@@ -29,10 +25,27 @@ export default {
 .about {
   margin: 12rem 2.4rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    margin: 9.6rem 4rem;
+  }
 
   &__image {
     width: 100%;
     border-radius: 0.8rem;
+    background: url("../../assets/shared/mobile/image-best-gear.jpg");
+    background-size: cover;
+    background-position: top center;
+    height: 30rem;
+
+    @media (min-width: 768px) {
+      background: url("../../assets/shared/tablet/image-best-gear.jpg");
+      background-size: cover;
+      background-position: center;
+    }
   }
 
   &__heading {
@@ -42,6 +55,14 @@ export default {
     font-size: 2.8rem;
     line-height: 3.825rem;
     letter-spacing: 0.1rem;
+
+    @media (min-width: 768px) {
+      font-size: 4rem;
+      line-height: 4.4rem;
+      letter-spacing: 0.143rem;
+      width: 57.3rem;
+      margin-top: 6.3rem;
+    }
 
     & span {
       color: #d87d4a;
@@ -54,6 +75,10 @@ export default {
     font-size: 1.5rem;
     line-height: 2.5rem;
     color: #7d7d7d;
+
+    @media (min-width: 768px) {
+      width: 57.3rem;
+    }
   }
 }
 </style>

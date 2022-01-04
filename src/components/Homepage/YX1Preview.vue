@@ -1,10 +1,6 @@
 <template>
   <article class="preview">
-    <img
-      src="../../assets/home/mobile/image-earphones-yx1.jpg"
-      alt=""
-      class="preview__image"
-    />
+    <div class="preview__image"></div>
     <div class="div preview__text">
       <h2 class="preview__text__heading">YX1 Earphones</h2>
       <button class="preview__text__btn default-btn">See product</button>
@@ -20,9 +16,27 @@ export default { name: "YX1Preview" };
 .preview {
   margin: 2.4rem;
 
+  @media (min-width: 768px) {
+    display: flex;
+    height: 32rem;
+  }
+
   &__image {
     width: 100%;
     border-radius: 0.8rem;
+    background: url("../../assets/home/mobile/image-earphones-yx1.jpg");
+    background-size: cover;
+    height: 20rem;
+    background-position: center;
+
+    @media (min-width: 768px) {
+      width: 50%;
+      object-fit: cover;
+      height: 100%;
+      background: url("../../assets/home/tablet/image-earphones-yx1.jpg");
+      background-size: cover;
+      background-position: center;
+    }
   }
 
   &__text {
@@ -30,6 +44,13 @@ export default { name: "YX1Preview" };
     background: #f1f1f1;
     padding: 4.1rem 0 4.1rem 2.4rem;
     border-radius: 0.8rem;
+
+    @media (min-width: 768px) {
+      width: 50%;
+      margin: 0;
+      margin-left: 1.1rem;
+      padding: 10.1rem 5.1rem 10.1rem 4.1rem;
+    }
 
     &__heading {
       font-weight: 700;

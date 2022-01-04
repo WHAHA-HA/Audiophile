@@ -26,24 +26,28 @@
       helping you get the most out of personal audio. Come and visit our demo
       facility - we’re open 7 days a week.
     </p>
-    <p class="footer__copyright-text">Copyright 2021. All Rights Reserved</p>
-    <ul class="footer__social-media-links">
-      <li class="footer__social-media-links__link">
-        <router-link to="#" aria-label="Go to our Facebook"
-          ><i class="fab fa-facebook fa-2x"></i
-        ></router-link>
-      </li>
-      <li class="footer__social-media-links__link">
-        <router-link to="#" aria-label="Go to our Twitter"
-          ><i class="fab fa-twitter fa-2x"></i
-        ></router-link>
-      </li>
-      <li class="footer__social-media-links__link">
-        <router-link to="#" aria-label="Go to our Instagram"
-          ><i class="fab fa-instagram fa-2x"></i
-        ></router-link>
-      </li>
-    </ul>
+    <div class="footer__copyright-section">
+      <p class="footer__copyright-section__copyright-text">
+        Copyright 2021. All Rights Reserved
+      </p>
+      <ul class="footer__copyright-section__social-media-links">
+        <li class="footer__copyright-section__social-media-links__link">
+          <router-link to="#" aria-label="Go to our Facebook"
+            ><i class="fab fa-facebook fa-2x"></i
+          ></router-link>
+        </li>
+        <li class="footer__copyright-section__social-media-links__link">
+          <router-link to="#" aria-label="Go to our Twitter"
+            ><i class="fab fa-twitter fa-2x"></i
+          ></router-link>
+        </li>
+        <li class="footer__copyright-section__social-media-links__link">
+          <router-link to="#" aria-label="Go to our Instagram"
+            ><i class="fab fa-instagram fa-2x"></i
+          ></router-link>
+        </li>
+      </ul>
+    </div>
   </footer>
 </template>
 
@@ -60,6 +64,11 @@ export default {
   flex-direction: column;
   align-items: center;
 
+  @media (min-width: 768px) {
+    align-items: flex-start;
+    padding: 0 4rem 4.6rem 4rem;
+  }
+
   * {
     color: white;
     text-align: center;
@@ -73,9 +82,18 @@ export default {
 
   &__logo {
     margin: 4.8rem 0;
+
+    @media (min-width: 768px) {
+      margin: 5.6rem 0 3.2rem 0;
+    }
   }
 
   &__link-list {
+    @media (min-width: 768px) {
+      display: flex;
+      align-items: center;
+    }
+
     &__link {
       margin-bottom: 1.6rem;
       font-weight: 700;
@@ -83,6 +101,11 @@ export default {
       line-height: 2.5rem;
       letter-spacing: 0.2rem;
       text-transform: uppercase;
+
+      @media (min-width: 768px) {
+        margin: 0;
+        margin-right: 3.4rem;
+      }
 
       &:hover * {
         color: #d87d4a;
@@ -100,29 +123,50 @@ export default {
     font-weight: 500;
     font-size: 1.5rem;
     line-height: 2.5rem;
+
+    @media (min-width: 768px) {
+      text-align: left;
+      margin: 3.2rem 0 8rem 0;
+    }
   }
 
-  &__copyright-text {
-    color: #878787;
-    font-weight: 700;
-    font-size: 1.5rem;
-    line-height: 2.5rem;
-  }
-
-  &__social-media-links {
+  &__copyright-section {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin: 4.8rem 0 3.8rem 0;
 
-    &__link {
-      margin-right: 1.6rem;
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+    }
 
-      &:hover i {
-        color: #d87d4a;
+    &__copyright-text {
+      color: #878787;
+      font-weight: 700;
+      font-size: 1.5rem;
+      line-height: 2.5rem;
+    }
+
+    &__social-media-links {
+      display: flex;
+      align-items: center;
+      margin: 4.8rem 0 3.8rem 0;
+
+      @media (min-width: 768px) {
+        margin: 0;
       }
 
-      &:last-child {
-        margin-right: 0;
+      &__link {
+        margin-right: 1.6rem;
+
+        &:hover i {
+          color: #d87d4a;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
       }
     }
   }

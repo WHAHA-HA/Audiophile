@@ -58,6 +58,13 @@ export default {
     line-height: 4rem;
     letter-spacing: 0.129rem;
     color: white;
+
+    @media (min-width: 768px) {
+      font-size: 5.6rem;
+      line-height: 5.8rem;
+      letter-spacing: 0.2rem;
+      width: 26rem;
+    }
   }
 
   &__description {
