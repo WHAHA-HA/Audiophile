@@ -10,26 +10,20 @@
         />
         <ul class="footer__content__first-line__link-list">
           <li class="footer__content__first-line__link-list__link">
-            <router-link @click="$emit('scroll-to-top')" to="/"
-              >Home</router-link
-            >
+            <router-link @click="scrollToTop" to="/">Home</router-link>
           </li>
           <li class="footer__content__first-line__link-list__link">
-            <router-link
-              @click="$emit('scroll-to-top')"
-              to="/category/headphones"
+            <router-link @click="scrollToTop" to="/category/headphones"
               >Headphones</router-link
             >
           </li>
           <li class="footer__content__first-line__link-list__link">
-            <router-link @click="$emit('scroll-to-top')" to="/category/speakers"
+            <router-link @click="scrollToTop" to="/category/speakers"
               >Speakers</router-link
             >
           </li>
           <li class="footer__content__first-line__link-list__link">
-            <router-link
-              @click="$emit('scroll-to-top')"
-              to="/category/earphones"
+            <router-link @click="scrollToTop" to="/category/earphones"
               >Earphones</router-link
             >
           </li>
@@ -76,7 +70,11 @@
 <script>
 export default {
   name: "Footer",
-  emits: ["scroll-to-top"],
+  methods: {
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
+  },
 };
 </script>
 

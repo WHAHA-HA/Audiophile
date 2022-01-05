@@ -24,8 +24,8 @@
     <h2 class="category__name">{{ product }}</h2>
     <router-link
       class="category__link"
-      to="/category/headphones"
-      @click="$emit('scroll-to-top')"
+      :to="{ name: 'CategoryPage', params: { category: `${product}` } }"
+      @click="scrollToTop"
     >
       Shop
       <img
@@ -43,7 +43,11 @@ export default {
   props: {
     product: String,
   },
-  emits: ["scroll-to-top"],
+  methods: {
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
+  },
 };
 </script>
 
