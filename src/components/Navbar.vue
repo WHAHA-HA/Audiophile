@@ -38,11 +38,12 @@ export default {
   @media (min-width: 768px) {
     justify-content: flex-start;
     padding: 3.2rem 0;
-    margin: 0 4rem;
+    margin: 0 auto;
+    width: 68.9rem;
   }
 
-  @media (min-width: 1025px) {
-    margin: 0 16.5rem;
+  @media (min-width: 1205px) {
+    width: 111rem;
   }
 
   button {
@@ -54,7 +55,7 @@ export default {
     width: 1.6rem;
     height: 1.5rem;
 
-    @media (min-width: 1025px) {
+    @media (min-width: 1205px) {
       display: none;
     }
   }
@@ -66,7 +67,7 @@ export default {
       margin-left: 4.2rem;
     }
 
-    @media (min-width: 1025px) {
+    @media (min-width: 1205px) {
       margin-left: 0;
     }
   }

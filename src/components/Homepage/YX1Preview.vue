@@ -14,11 +14,17 @@ export default { name: "YX1Preview" };
 
 <style lang="scss" scoped>
 .preview {
-  margin: 2.4rem;
+  margin: 2.4rem auto 0 auto;
+  width: 32.7rem;
 
   @media (min-width: 768px) {
     display: flex;
     height: 32rem;
+    width: 68.9rem;
+  }
+
+  @media (min-width: 1205px) {
+    width: 111rem;
   }
 
   &__image {
@@ -37,6 +43,12 @@ export default { name: "YX1Preview" };
       background-size: cover;
       background-position: center;
     }
+
+    @media (min-width: 1205px) {
+      background: url("../../assets/home/desktop/image-earphones-yx1.jpg");
+      background-size: cover;
+      background-position: center;
+    }
   }
 
   &__text {
@@ -50,6 +62,11 @@ export default { name: "YX1Preview" };
       margin: 0;
       margin-left: 1.1rem;
       padding: 10.1rem 5.1rem 10.1rem 4.1rem;
+    }
+
+    @media (min-width: 1205px) {
+      margin-left: 3rem;
+      padding: 10.1rem 19.8rem 10.1rem 9.5rem;
     }
 
     &__heading {

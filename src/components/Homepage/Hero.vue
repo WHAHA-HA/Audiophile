@@ -25,14 +25,18 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 10.8rem 2.3rem 11.2rem 2.3rem;
+  margin: 0 auto;
+  width: 32.7rem;
 
   @media (min-width: 768px) {
     padding: 12.6rem 19.5rem 16.7rem 19.5rem;
+    width: 68.9rem;
   }
 
   @media (min-width: 1205px) {
-    padding: 12.8rem 0 15.8rem 16.5rem;
+    padding: 12.8rem 0 15.8rem 0;
     align-items: flex-start;
+    width: 111rem;
   }
 
   * {
@@ -55,11 +59,13 @@ export default {
     line-height: 4rem;
     letter-spacing: 0.129rem;
     margin: 1.6rem 0 2.4rem 0;
+    width: 32.8rem;
 
     @media (min-width: 768px) {
       font-size: 5.6rem;
       line-height: 5.8rem;
       letter-spacing: 0.2rem;
+      width: 39.6rem;
     }
 
     @media (min-width: 1205px) {
@@ -74,6 +80,7 @@ export default {
     font-size: 1.5rem;
     line-height: 2.5rem;
     margin-bottom: 2.8rem;
+    width: 32.8rem;
 
     @media (min-width: 1205px) {
       width: 37.9rem;
