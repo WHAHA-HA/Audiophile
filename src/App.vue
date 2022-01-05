@@ -1,11 +1,16 @@
 <template>
-  <router-view />
+  <div class="wrapper">
+    <router-view />
+    <Footer />
+  </div>
 </template>
 
 <script>
+import Footer from "./components/Footer.vue";
+
 export default {
   name: "App",
-  components: {},
+  components: { Footer },
 };
 </script>
 
@@ -50,5 +55,12 @@ button {
   &:hover {
     background: #f6af85;
   }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
 }
 </style>

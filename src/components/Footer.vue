@@ -85,9 +85,14 @@ export default {
   }
 
   &__content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
     @media (min-width: 768px) {
       margin: 0 auto;
       width: 68.9rem;
+      align-items: flex-start;
     }
 
     @media (min-width: 1205px) {
@@ -104,6 +109,7 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 100%;
 
       @media (min-width: 768px) {
         align-items: flex-start;
