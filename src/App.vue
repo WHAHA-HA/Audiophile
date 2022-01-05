@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <router-view />
-    <Footer />
+    <Footer @scroll-to-top="scrollToTop" />
   </div>
 </template>
 
@@ -11,6 +11,11 @@ import Footer from "./components/Footer.vue";
 export default {
   name: "App",
   components: { Footer },
+  methods: {
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
+  },
 };
 </script>
 

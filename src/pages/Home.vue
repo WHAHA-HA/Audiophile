@@ -2,9 +2,9 @@
   <Header />
   <main>
     <section class="categories">
-      <Category product="headphones" />
-      <Category product="speakers" />
-      <Category product="earphones" />
+      <Category product="headphones" @scroll-to-top="scrollToTop" />
+      <Category product="speakers" @scroll-to-top="scrollToTop" />
+      <Category product="earphones" @scroll-to-top="scrollToTop" />
     </section>
     <ZX9Preview />
     <ZX7Preview />
@@ -30,6 +30,11 @@ export default {
     ZX7Preview,
     YX1Preview,
     AboutSection,
+  },
+  methods: {
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
   },
 };
 </script>

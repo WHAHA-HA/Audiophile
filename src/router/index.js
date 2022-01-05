@@ -4,7 +4,11 @@ import CategoryPage from "../pages/CategoryPage.vue";
 
 const routes = [
   { path: "/", name: "Home", component: Home },
-  { path: "/:category", name: "CategoryPage", component: CategoryPage },
+  {
+    path: "/category/:category",
+    name: "CategoryPage",
+    component: CategoryPage,
+  },
 ];
 
 const router = createRouter({

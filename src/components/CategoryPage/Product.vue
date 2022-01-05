@@ -20,8 +20,35 @@ export default {
   props: { product: Object },
   computed: {
     editSrc() {
-      return require(`../../${this.product.image.desktop.slice(2)}`);
+      if (this.windowSize === "mobile") {
+        return require(`../../${this.product.categoryImage.mobile.slice(2)}`);
+      } else if (this.windowSize === "tablet") {
+        return require(`../../${this.product.categoryImage.tablet.slice(2)}`);
+      } else {
+        return require(`../../${this.product.categoryImage.desktop.slice(2)}`);
+      }
     },
+  },
+  data() {
+    return {
+      windowSize: null,
+    };
+  },
+  methods: {
+    setWindowSize() {
+      let windowWidth = window.innerWidth;
+      if (windowWidth < 768) {
+        this.windowSize = "mobile";
+      } else if (windowWidth < 1205) {
+        this.windowSize = "tablet";
+      } else {
+        this.windowSize = "desktop";
+        console.log("desktop");
+      }
+    },
+  },
+  created() {
+    window.addEventListener("resize", this.setWindowSize);
   },
 };
 </script>

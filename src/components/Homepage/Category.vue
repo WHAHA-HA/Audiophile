@@ -22,7 +22,11 @@
       id="earphones"
     />
     <h2 class="category__name">{{ product }}</h2>
-    <router-link class="category__link" to="#">
+    <router-link
+      class="category__link"
+      to="/category/headphones"
+      @click="$emit('scroll-to-top')"
+    >
       Shop
       <img
         src="../../assets/shared/desktop/icon-arrow-right.svg"
@@ -39,6 +43,7 @@ export default {
   props: {
     product: String,
   },
+  emits: ["scroll-to-top"],
 };
 </script>
 

@@ -10,9 +10,9 @@
     <ul class="navbar__desktop-menu">
       <li class="navbar__desktop-menu__link">
         <router-link to="/">Home</router-link>
-        <router-link to="/headphones">Headphones</router-link>
-        <router-link to="/speakers">Speakers</router-link>
-        <router-link to="/earphones">Earphones</router-link>
+        <router-link to="/category/headphones">Headphones</router-link>
+        <router-link to="/category/speakers">Speakers</router-link>
+        <router-link to="/category/earphones">Earphones</router-link>
       </li>
     </ul>
     <button class="navbar__cart-btn"></button>

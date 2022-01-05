@@ -20,10 +20,12 @@ export default {
   data() {
     return {
       productInfo: jsonData,
-      category: this.$route.params.category,
     };
   },
   computed: {
+    category() {
+      return this.$route.params.category;
+    },
     headphones() {
       return this.productInfo.filter(
         (product) => product.category === "headphones"
@@ -49,9 +51,7 @@ export default {
     sortedProducts() {
       return this.currentProducts.slice().sort((a, b) => b.new - a.new);
     },
-  },
-  beforeMount() {
-    console.log("productInfo", this.currentProducts);
+    updated: {},
   },
 };
 </script>
