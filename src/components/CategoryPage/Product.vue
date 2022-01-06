@@ -52,6 +52,7 @@ export default {
     },
   },
   created() {
+    this.setWindowSize();
     window.addEventListener("resize", this.setWindowSize);
   },
 };

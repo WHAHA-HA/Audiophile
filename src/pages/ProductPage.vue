@@ -54,6 +54,7 @@ export default {
       total: 1,
       productName: this.$route.params.product,
       products: data,
+      windowSize: null,
     };
   },
   methods: {
@@ -65,9 +66,22 @@ export default {
         this.total--;
       }
     },
+    setWindowSize() {
+      let windowWidth = window.innerWidth;
+      if (windowWidth < 768) {
+        this.windowSize = "mobile";
+      } else if (windowWidth < 1205) {
+        this.windowSize = "tablet";
+      } else {
+        this.windowSize = "desktop";
+      }
+    },
   },
   created() {
+    this.setWindowSize();
+    window.addEventListener("resize", this.setWindowSize);
     console.log(this.currentProduct);
+    console.log("windowSize", this.windowSize);
     window.scrollTo(0, 0);
   },
   computed: {
@@ -78,17 +92,11 @@ export default {
     },
     editSrc() {
       if (this.windowSize === "mobile") {
-        return require(`../${this.currentProduct.categoryImage.mobile.slice(
-          2
-        )}`);
+        return require(`../${this.currentProduct.image.mobile.slice(2)}`);
       } else if (this.windowSize === "tablet") {
-        return require(`../${this.currentProduct.categoryImage.tablet.slice(
-          2
-        )}`);
+        return require(`../${this.currentProduct.image.tablet.slice(2)}`);
       } else {
-        return require(`../${this.currentProduct.categoryImage.desktop.slice(
-          2
-        )}`);
+        return require(`../${this.currentProduct.image.desktop.slice(2)}`);
       }
     },
   },
@@ -99,6 +107,14 @@ export default {
 main {
   width: 32.7rem;
   margin: 0 auto;
+
+  @media (min-width: 768px) {
+    width: 68.9rem;
+  }
+
+  @media (min-width: 1205px) {
+    width: 111rem;
+  }
 }
 
 .back-link {
@@ -108,22 +124,29 @@ main {
   color: #7d7d7d;
   margin: 1.6rem 0 2.4rem 0;
   display: block;
+
+  @media (min-width: 768px) {
+    margin-top: 3.3rem;
+  }
+
+  @media (min-width: 1205px) {
+    margin-top: 7.9rem;
+  }
 }
 
 .overview {
   margin: 2.4rem auto 0 auto;
-  width: 32.7rem;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   @media (min-width: 768px) {
-    width: 68.9rem;
+    flex-direction: row;
   }
 
   @media (min-width: 1205px) {
-    width: 111rem;
-    flex-direction: row;
+    margin-top: 5.6rem;
   }
 
   & * {
@@ -137,7 +160,8 @@ main {
     object-position: center;
 
     @media (min-width: 768px) {
-      height: 35.2rem;
+      height: 48rem;
+      width: 28.1rem;
     }
 
     @media (min-width: 1205px) {
@@ -150,7 +174,9 @@ main {
     margin-top: 3.2rem;
 
     @media (min-width: 768px) {
-      width: 57.2rem;
+      width: 33.95rem;
+      margin-top: 0;
+      margin-left: 6.9rem;
     }
 
     @media (min-width: 1205px) {
@@ -226,6 +252,12 @@ main {
           font-size: 1.3rem;
           line-height: 1.776rem;
           letter-spacing: 0.1rem;
+        }
+
+        & button {
+          &:hover {
+            color: rgba(216, 125, 74, 1);
+          }
         }
       }
     }
