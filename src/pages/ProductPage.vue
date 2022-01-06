@@ -73,6 +73,16 @@
         <img :src="gallerySrc('third')" alt="" />
       </div>
     </section>
+    <section class="others">
+      <h4 class="others__heading">You may also like</h4>
+      <div class="others__container">
+        <OthersCard
+          v-for="product in currentProduct.others"
+          :key="product.name"
+          :product="product"
+        />
+      </div>
+    </section>
     <ProductPageNavigation />
   </main>
 </template>
@@ -81,10 +91,11 @@
 import Header from "../components/ProductPage/Header.vue";
 import ProductPageNavigation from "../components/ProductPageNavigation.vue";
 import data from "../data.json";
+import OthersCard from "../components/ProductPage/OthersCard.vue";
 
 export default {
   name: "ProductPage",
-  components: { Header, ProductPageNavigation },
+  components: { Header, ProductPageNavigation, OthersCard },
   data() {
     return {
       total: 1,
@@ -523,6 +534,43 @@ main {
         height: 59.2rem;
         margin-left: 3rem;
       }
+    }
+  }
+}
+
+.others {
+  margin-top: 12rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: calc(12rem - 5.2rem);
+
+  &__heading {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 3.6rem;
+    letter-spacing: 0.086rem;
+    margin-bottom: 4rem;
+
+    @media (min-width: 768px) {
+      font-size: 3.2rem;
+      line-height: 3.6rem;
+      letter-spacing: 0.114rem;
+      margin-bottom: 5.6rem;
+    }
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      align-items: flex-start;
     }
   }
 }
