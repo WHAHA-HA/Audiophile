@@ -6,7 +6,10 @@
       Experience natural, lifelike audio and exceptional build quality made for
       the passionate music enthusiast.
     </p>
-    <router-link class="hero__product-link" to="#">
+    <router-link
+      class="hero__product-link"
+      to="/product/XX99 Mark II Headphones"
+    >
       <button class="hero__product-link__btn default-btn">See product</button>
     </router-link>
   </section>
