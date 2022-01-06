@@ -2,7 +2,7 @@
   <Header />
   <main>
     <p class="back-link" @click="$router.back()">Go back</p>
-    <article class="overview">
+    <section class="overview">
       <img :src="editSrc" class="overview__image" />
       <div class="overview__text">
         <p class="overview__text__tag" v-show="currentProduct.new">
@@ -36,8 +36,8 @@
           </button>
         </div>
       </div>
-    </article>
-    <article class="details">
+    </section>
+    <section class="details">
       <div class="details__features">
         <h3 class="details__features__heading">Features</h3>
         <p
@@ -63,7 +63,16 @@
           </li>
         </ul>
       </div>
-    </article>
+    </section>
+    <section class="gallery">
+      <div class="gallery__left">
+        <img :src="gallerySrc('first')" alt="" class="gallery__left__first" />
+        <img :src="gallerySrc('second')" alt="" class="gallery__left__second" />
+      </div>
+      <div class="gallery__right">
+        <img :src="gallerySrc('third')" alt="" />
+      </div>
+    </section>
     <ProductPageNavigation />
   </main>
 </template>
@@ -101,6 +110,51 @@ export default {
         this.windowSize = "tablet";
       } else {
         this.windowSize = "desktop";
+      }
+    },
+    gallerySrc(index) {
+      if (index === "first") {
+        if (this.windowSize === "mobile") {
+          return require(`../${this.currentProduct.gallery.first.mobile.slice(
+            2
+          )}`);
+        } else if (this.windowSize === "tablet") {
+          return require(`../${this.currentProduct.gallery.first.tablet.slice(
+            2
+          )}`);
+        } else {
+          return require(`../${this.currentProduct.gallery.first.desktop.slice(
+            2
+          )}`);
+        }
+      } else if (index === "second") {
+        if (this.windowSize === "mobile") {
+          return require(`../${this.currentProduct.gallery.second.mobile.slice(
+            2
+          )}`);
+        } else if (this.windowSize === "tablet") {
+          return require(`../${this.currentProduct.gallery.second.tablet.slice(
+            2
+          )}`);
+        } else {
+          return require(`../${this.currentProduct.gallery.second.desktop.slice(
+            2
+          )}`);
+        }
+      } else {
+        if (this.windowSize === "mobile") {
+          return require(`../${this.currentProduct.gallery.third.mobile.slice(
+            2
+          )}`);
+        } else if (this.windowSize === "tablet") {
+          return require(`../${this.currentProduct.gallery.third.tablet.slice(
+            2
+          )}`);
+        } else {
+          return require(`../${this.currentProduct.gallery.third.desktop.slice(
+            2
+          )}`);
+        }
       }
     },
   },
@@ -402,6 +456,72 @@ main {
           color: #7d7d7d;
           text-transform: capitalize;
         }
+      }
+    }
+  }
+}
+
+.gallery {
+  @media (min-width: 768px) {
+    display: flex;
+  }
+
+  img {
+    width: 100%;
+    border-radius: 0.8rem;
+    margin: 1rem 0;
+    object-fit: cover;
+    object-position: center;
+
+    @media (min-width: 768px) {
+      margin: 0;
+    }
+  }
+
+  &__left {
+    @media (min-width: 768px) {
+      width: 27.7rem;
+    }
+
+    @media (min-width: 1205px) {
+      width: 44.5rem;
+    }
+
+    img {
+      height: 17.4rem;
+
+      @media (min-width: 1205px) {
+        height: 28rem;
+      }
+    }
+
+    &__first {
+      margin-top: 0 !important;
+
+      @media (min-width: 768px) {
+        margin-bottom: 2rem !important;
+      }
+
+      @media (min-width: 1205px) {
+        margin-bottom: 3.2rem !important;
+      }
+    }
+  }
+
+  &__right {
+    img {
+      margin-bottom: 0 !important;
+      height: 36.8rem;
+
+      @media (min-width: 768px) {
+        width: 39.5rem;
+        margin-left: 1.8rem;
+      }
+
+      @media (min-width: 1205px) {
+        width: 64.5rem;
+        height: 59.2rem;
+        margin-left: 3rem;
       }
     }
   }
