@@ -51,7 +51,6 @@ export default {
     sortedProducts() {
       return this.currentProducts.slice().sort((a, b) => b.new - a.new);
     },
-    updated: {},
   },
 };
 </script>
