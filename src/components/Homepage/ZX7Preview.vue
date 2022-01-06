@@ -1,7 +1,7 @@
 <template>
   <article class="preview">
     <h2 class="preview__header">ZX7 Speaker</h2>
-    <router-link to="/product/ZX7 Speaker">
+    <router-link to="/product/zx7-speaker">
       <button class="preview__btn default-btn">See product</button>
     </router-link>
   </article>

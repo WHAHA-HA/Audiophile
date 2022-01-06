@@ -9,7 +9,7 @@
       <p class="product__text__description">
         {{ product && product.description }}
       </p>
-      <router-link :to="`/product/${product.name}`"
+      <router-link :to="`/product/${product.slug}`"
         ><button class="product__text__btn default-btn">
           See product
         </button></router-link

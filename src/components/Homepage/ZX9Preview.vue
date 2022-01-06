@@ -7,7 +7,7 @@
         Upgrade to premium speakers that are phenomenally built to deliver truly
         remarkable sound.
       </p>
-      <router-link to="/product/ZX9 Speaker" class="preview__text__link"
+      <router-link to="/product/zx9-speaker" class="preview__text__link"
         ><button class="preview__text__link__btn default-btn">
           See Product
         </button></router-link

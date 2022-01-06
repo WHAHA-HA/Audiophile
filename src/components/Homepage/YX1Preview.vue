@@ -3,7 +3,7 @@
     <div class="preview__image"></div>
     <div class="div preview__text">
       <h2 class="preview__text__heading">YX1 Earphones</h2>
-      <router-link to="/product/YX1 Wireless Earphones">
+      <router-link to="/product/yx1-earphones">
         <button class="preview__text__btn default-btn">See product</button>
       </router-link>
     </div>

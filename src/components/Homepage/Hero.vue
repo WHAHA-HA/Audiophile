@@ -8,7 +8,7 @@
     </p>
     <router-link
       class="hero__product-link"
-      to="/product/XX99 Mark II Headphones"
+      to="/product/xx99-mark-two-headphones"
     >
       <button class="hero__product-link__btn default-btn">See product</button>
     </router-link>

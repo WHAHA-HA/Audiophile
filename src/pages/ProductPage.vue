@@ -99,7 +99,6 @@ export default {
   data() {
     return {
       total: 1,
-      productName: this.$route.params.product,
       products: data,
       windowSize: null,
     };
@@ -182,7 +181,7 @@ export default {
     currentProduct() {
       return this.products
         .slice()
-        .find((product) => product.name === this.productName);
+        .find((product) => product.slug === this.$route.params.product);
     },
     editSrc() {
       if (this.windowSize === "mobile") {
