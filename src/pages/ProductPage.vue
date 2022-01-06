@@ -1,7 +1,7 @@
 <template>
   <Header />
   <main>
-    <router-link to="#" class="back-link">Go back</router-link>
+    <p class="back-link" @click="$router.back()">Go back</p>
     <article class="overview">
       <img :src="editSrc" class="overview__image" />
       <div class="overview__text">
@@ -35,6 +35,33 @@
             Add to cart
           </button>
         </div>
+      </div>
+    </article>
+    <article class="details">
+      <div class="details__features">
+        <h3 class="details__features__heading">Features</h3>
+        <p
+          class="details__features__text"
+          v-for="paragraph in editedText"
+          :key="paragraph"
+        >
+          {{ paragraph }}
+        </p>
+      </div>
+      <div class="details__box">
+        <h3 class="details__box__heading">In the box</h3>
+        <ul class="details__box__list">
+          <li
+            class="details__box__list__item"
+            v-for="item in currentProduct.includes"
+            :key="item.item"
+          >
+            <p class="details__box__list__item__quantity">
+              {{ item.quantity }}x
+            </p>
+            <p class="details__box__list__item__name">{{ item.item }}</p>
+          </li>
+        </ul>
       </div>
     </article>
     <ProductPageNavigation />
@@ -83,6 +110,8 @@ export default {
     console.log(this.currentProduct);
     console.log("windowSize", this.windowSize);
     window.scrollTo(0, 0);
+    console.log("editedText", this.editedText);
+    console.log("includes", this.currentProduct.features.includes("\n\n"));
   },
   computed: {
     currentProduct() {
@@ -98,6 +127,25 @@ export default {
       } else {
         return require(`../${this.currentProduct.image.desktop.slice(2)}`);
       }
+    },
+    editedText() {
+      const paragraphs = [];
+      let myString = this.currentProduct.features;
+      while (myString.includes("\n\n")) {
+        console.log("say yes");
+        let index = myString.indexOf("\n\n");
+        console.log("index", index);
+        paragraphs.push(myString.slice(0, index));
+        console.log("paragraphs", paragraphs);
+        myString = myString.slice(index + 2);
+        console.log("new string", myString);
+      }
+      if (paragraphs.length > 0) {
+        paragraphs.push(myString);
+      } else {
+        paragraphs.push(this.currentProduct.features);
+      }
+      return paragraphs;
     },
   },
 };
@@ -124,6 +172,7 @@ main {
   color: #7d7d7d;
   margin: 1.6rem 0 2.4rem 0;
   display: block;
+  cursor: pointer;
 
   @media (min-width: 768px) {
     margin-top: 3.3rem;
@@ -258,6 +307,100 @@ main {
           &:hover {
             color: rgba(216, 125, 74, 1);
           }
+        }
+      }
+    }
+  }
+}
+
+.details {
+  margin: 8.8rem auto 11.3rem auto;
+  width: 100%;
+
+  @media (min-width: 1205px) {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  h3 {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 3.6rem;
+    letter-spacing: 0.086rem;
+
+    @media (min-width: 768px) {
+      font-size: 3.2rem;
+      letter-spacing: 0.114rem;
+    }
+  }
+
+  &__features {
+    @media (min-width: 1205px) {
+      width: 63.5rem;
+    }
+    &__text {
+      margin-top: 2.4rem;
+      font-weight: 500;
+      font-size: 1.5rem;
+      line-height: 2.5rem;
+      color: #7d7d7d;
+
+      @media (min-width: 1205px) {
+        margin-top: 3.2rem;
+      }
+    }
+  }
+
+  &__box {
+    margin-top: 11.3rem;
+
+    @media (min-width: 768px) {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    @media (min-width: 1205px) {
+      width: 35rem;
+      margin: 0;
+      margin-left: 12.5rem;
+      display: block;
+    }
+
+    &__heading {
+      width: 35rem;
+    }
+
+    &__list {
+      margin-top: 2.4rem;
+
+      @media (min-width: 768px) {
+        margin-top: 0;
+      }
+
+      @media (min-width: 1205px) {
+        margin-top: 3.2rem;
+      }
+
+      * {
+        font-size: 1.5rem;
+        line-height: 2.5rem;
+      }
+
+      &__item {
+        display: flex;
+        align-items: center;
+
+        &__quantity {
+          font-weight: 700;
+          color: rgba(216, 125, 74, 1);
+        }
+
+        &__name {
+          font-weight: 500;
+          margin-left: 2.1rem;
+          color: #7d7d7d;
+          text-transform: capitalize;
         }
       }
     }
