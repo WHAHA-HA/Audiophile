@@ -5,6 +5,7 @@
     @toggle-menu-show="toggleMenu"
     ref="mobileMenu"
   />
+  <Cart />
   <div :class="['wrapper', show ? 'stop-scroll' : '']">
     <router-view @toggle-menu-show="toggleMenu" />
     <Footer />
@@ -14,10 +15,11 @@
 <script>
 import Footer from "./components/Footer.vue";
 import Menu from "./components/Menu.vue";
+import Cart from "./components/Cart.vue";
 
 export default {
   name: "App",
-  components: { Footer, Menu },
+  components: { Footer, Menu, Cart },
   data() {
     return {
       show: false,

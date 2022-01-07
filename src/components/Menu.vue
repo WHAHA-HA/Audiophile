@@ -46,6 +46,10 @@ export default {
   z-index: 1;
   position: absolute;
   opacity: 0.4;
+
+  @media (min-width: 1205px) {
+    display: none !important;
+  }
 }
 
 .menu {
@@ -60,12 +64,15 @@ export default {
   z-index: 2;
   opacity: 1;
   max-height: 75vh;
-  overflow: scroll;
+  overflow-y: auto;
 
   @media (min-width: 768px) {
-    height: 34rem;
     max-height: auto;
     padding: 10.8rem 0 6.7rem 0;
+  }
+
+  @media (min-width: 1205px) {
+    display: none !important;
   }
 }
 
