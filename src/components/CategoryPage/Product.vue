@@ -47,7 +47,6 @@ export default {
         this.windowSize = "tablet";
       } else {
         this.windowSize = "desktop";
-        console.log("desktop");
       }
     },
   },

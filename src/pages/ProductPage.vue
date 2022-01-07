@@ -172,11 +172,7 @@ export default {
   created() {
     this.setWindowSize();
     window.addEventListener("resize", this.setWindowSize);
-    console.log(this.currentProduct);
-    console.log("windowSize", this.windowSize);
     window.scrollTo(0, 0);
-    console.log("editedText", this.editedText);
-    console.log("includes", this.currentProduct.features.includes("\n\n"));
   },
   computed: {
     currentProduct() {
@@ -197,13 +193,9 @@ export default {
       const paragraphs = [];
       let myString = this.currentProduct.features;
       while (myString.includes("\n\n")) {
-        console.log("say yes");
         let index = myString.indexOf("\n\n");
-        console.log("index", index);
         paragraphs.push(myString.slice(0, index));
-        console.log("paragraphs", paragraphs);
         myString = myString.slice(index + 2);
-        console.log("new string", myString);
       }
       if (paragraphs.length > 0) {
         paragraphs.push(myString);

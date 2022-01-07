@@ -27,7 +27,7 @@ export default {
   methods: {
     toggleMenu(myVar) {
       if (myVar === "logo") {
-        this.show = this.show ? false : true;
+        this.show = false;
       } else {
         this.show = !this.show;
       }

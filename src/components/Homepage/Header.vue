@@ -14,9 +14,7 @@ export default {
   components: { Navbar, Hero },
   emits: ["toggle-menu-show"],
   methods: {
-    clickHandler() {
-      console.log();
-    },
+    clickHandler() {},
   },
 };
 </script>
