@@ -10,10 +10,14 @@
     </div>
     <div class="products">
       <div class="products__item" v-for="product in cart" :key="product.id">
-        <img :src="editSrc(product)" alt="" />
-        <div class="products__item__info">
-          <h4>{{ product.name }}</h4>
-          <p>{{ separator(product.price) }}</p>
+        <div class="left">
+          <img :src="editSrc(product)" alt="" />
+          <div class="products__item__info">
+            <h4>
+              {{ product.slug.slice(0, product.slug.indexOf("-")) }}
+            </h4>
+            <p>{{ separator(product.price) }}</p>
+          </div>
         </div>
         <div class="products__item__quantity">
           <button class="less" @click="changeQuantity('subtract', product.id)">
@@ -76,10 +80,6 @@ export default {
   z-index: 1;
   position: absolute;
   opacity: 0.4;
-
-  @media (min-width: 1205px) {
-    display: none !important;
-  }
 }
 
 .cart {
@@ -95,6 +95,18 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (min-width: 768px) {
+    width: 37.7rem;
+    right: 4rem;
+    transform: translate(0);
+    left: auto;
+  }
+
+  @media (min-width: 1205px) {
+    top: 12.3rem;
+    right: 16.5rem;
+  }
 
   &__header {
     display: flex;
@@ -124,7 +136,8 @@ export default {
   .products {
     margin: 3.2rem 0;
     width: 100%;
-    max-height: 24rem;
+    height: 24rem;
+    max-height: 26rem;
     overflow-y: auto;
     &__item {
       display: flex;
@@ -137,17 +150,27 @@ export default {
         margin-bottom: 0;
       }
 
+      .left {
+        display: flex;
+        align-items: center;
+      }
+
       img {
         width: 6.4rem;
         border-radius: 0.8rem;
       }
 
       &__info {
-        width: 7.6rem;
+        margin-left: 1.6rem;
+        @media (min-width: 768px) {
+          margin-left: 1.6rem;
+          width: 13.7rem;
+        }
         h4 {
           font-weight: 700;
           font-size: 1.5rem;
           line-height: 2.5rem;
+          text-transform: uppercase;
         }
 
         p {
@@ -162,7 +185,6 @@ export default {
         display: flex;
         align-items: center;
         background: #f1f1f1;
-        padding: 0.7rem 1.15rem;
 
         * {
           border: none;
@@ -171,10 +193,20 @@ export default {
           font-size: 1.3rem;
           line-height: 1.776rem;
           letter-spacing: 0.1rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        button {
+          width: 3.2rem;
+          color: #b5b5b5;
+          height: 3.2rem;
         }
 
         .value {
-          margin: 0 1.3rem;
+          width: 3.2rem;
+          height: 3.2rem;
         }
       }
     }
@@ -200,6 +232,10 @@ export default {
       font-size: 1.8rem;
       line-height: 2.459rem;
     }
+  }
+
+  &__btn {
+    width: 100%;
   }
 }
 
