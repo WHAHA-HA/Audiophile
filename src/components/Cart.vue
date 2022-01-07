@@ -1,7 +1,7 @@
 <template>
-  <div class="overlay"></div>
+  <div :class="['overlay', show ? 'showElement' : 'hideElement']"></div>
 
-  <div class="cart">
+  <div :class="['cart', show ? 'showElement' : 'hideElement']">
     <div class="cart__header">
       <h3 class="cart__header__title">Cart(3)</h3>
       <button class="cart__header__btn">Remove all</button>
@@ -64,6 +64,7 @@
 <script>
 export default {
   name: "Cart",
+  props: { show: Boolean },
 };
 </script>
 
@@ -124,6 +125,8 @@ export default {
   .products {
     margin: 3.2rem 0;
     width: 100%;
+    max-height: 24rem;
+    overflow-y: auto;
     &__item {
       display: flex;
       align-items: center;
@@ -198,5 +201,13 @@ export default {
       line-height: 2.459rem;
     }
   }
+}
+
+.showElement {
+  display: flex;
+}
+
+.hideElement {
+  display: none;
 }
 </style>

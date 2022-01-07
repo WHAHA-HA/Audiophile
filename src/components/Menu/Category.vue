@@ -24,7 +24,7 @@
     <h2 class="category__name">{{ product }}</h2>
     <router-link
       class="category__link"
-      @click="$emit('toggle-menu-show', 'normal')"
+      @click="$emit('toggle-menu-show', 'menu')"
       :to="{ name: 'CategoryPage', params: { category: `${product}` } }"
     >
       Shop

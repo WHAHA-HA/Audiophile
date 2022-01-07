@@ -1,12 +1,12 @@
 <template>
   <Menu
-    :show="show"
+    :show="showMenu"
     :scrollTop="scrollTop"
     @toggle-menu-show="toggleMenu"
     ref="mobileMenu"
   />
-  <Cart />
-  <div :class="['wrapper', show ? 'stop-scroll' : '']">
+  <Cart :show="showCart" />
+  <div :class="['wrapper', showMenu || showCart ? 'stop-scroll' : '']">
     <router-view @toggle-menu-show="toggleMenu" />
     <Footer />
   </div>
@@ -22,16 +22,21 @@ export default {
   components: { Footer, Menu, Cart },
   data() {
     return {
-      show: false,
+      showMenu: false,
+      showCart: false,
       scrollTop: false,
+      cart: [],
     };
   },
   methods: {
     toggleMenu(myVar) {
       if (myVar === "logo") {
-        this.show = false;
-      } else {
-        this.show = !this.show;
+        this.showMenu = false;
+        this.showCart = false;
+      } else if (myVar === "menu") {
+        this.showMenu = !this.showMenu;
+      } else if (myVar === "cart") {
+        this.showCart = !this.showCart;
       }
       this.scrollTop = !this.scrollTop;
     },

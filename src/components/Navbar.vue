@@ -2,7 +2,7 @@
   <nav class="navbar">
     <button
       class="navbar__mobile-menu-btn"
-      @click="$emit('toggle-menu-show', 'normal')"
+      @click="$emit('toggle-menu-show', 'menu')"
     ></button>
     <router-link
       @click="$emit('toggle-menu-show', 'logo')"
@@ -22,7 +22,10 @@
         <router-link to="/category/earphones">Earphones</router-link>
       </li>
     </ul>
-    <button class="navbar__cart-btn"></button>
+    <button
+      class="navbar__cart-btn"
+      @click="$emit('toggle-menu-show', 'cart')"
+    ></button>
   </nav>
 </template>
 
