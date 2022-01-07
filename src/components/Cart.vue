@@ -104,7 +104,7 @@ export default {
   }
 
   @media (min-width: 1205px) {
-    top: 12.3rem;
+    top: 10rem;
     right: 16.5rem;
   }
 
@@ -138,6 +138,26 @@ export default {
     width: 100%;
     max-height: 26rem;
     overflow-y: auto;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      width: 0.7rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px grey;
+      border-radius: 1rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgb(49, 49, 49);
+      border-radius: 1rem;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: black;
+    }
+
     &__item {
       display: flex;
       align-items: center;
