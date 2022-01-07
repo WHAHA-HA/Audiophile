@@ -61,8 +61,7 @@ export default {
   @media (min-width: 768px) {
     margin: 0;
     margin-right: 1rem;
-    max-width: auto;
-    min-width: 22.3rem;
+    width: 22.3rem;
 
     &:last-child {
       margin-right: 0;

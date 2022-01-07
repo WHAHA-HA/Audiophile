@@ -61,6 +61,19 @@ export default {
   opacity: 1;
   max-height: 75vh;
   overflow: scroll;
+
+  @media (min-width: 768px) {
+    height: 34rem;
+    max-height: auto;
+    padding: 10.8rem 0 6.7rem 0;
+  }
+}
+
+.categories {
+  @media (min-width: 768px) {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .showElement {
