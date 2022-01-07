@@ -31,7 +31,10 @@
               +
             </button>
           </div>
-          <button class="overview__text__btn-section__btn default-btn">
+          <button
+            class="overview__text__btn-section__btn default-btn"
+            @click="$emit('add-to-cart', currentProduct.id)"
+          >
             Add to cart
           </button>
         </div>
@@ -96,7 +99,7 @@ import OthersCard from "../components/ProductPage/OthersCard.vue";
 export default {
   name: "ProductPage",
   components: { Header, ProductPageNavigation, OthersCard },
-  emits: ["toggle-menu-show"],
+  emits: ["toggle-menu-show", "add-to-cart"],
   data() {
     return {
       total: 1,

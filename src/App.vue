@@ -5,9 +5,9 @@
     @toggle-menu-show="toggleMenu"
     ref="mobileMenu"
   />
-  <Cart :show="showCart" />
+  <Cart :show="showCart" :cart="cart" />
   <div :class="['wrapper', showMenu || showCart ? 'stop-scroll' : '']">
-    <router-view @toggle-menu-show="toggleMenu" />
+    <router-view @toggle-menu-show="toggleMenu" @add-to-cart="addToCart" />
     <Footer />
   </div>
 </template>
@@ -16,6 +16,7 @@
 import Footer from "./components/Footer.vue";
 import Menu from "./components/Menu.vue";
 import Cart from "./components/Cart.vue";
+import data from "./data.json";
 
 export default {
   name: "App",
@@ -26,6 +27,7 @@ export default {
       showCart: false,
       scrollTop: false,
       cart: [],
+      products: data,
     };
   },
   methods: {
@@ -39,6 +41,11 @@ export default {
         this.showCart = !this.showCart;
       }
       this.scrollTop = !this.scrollTop;
+    },
+    addToCart(id) {
+      console.log(id);
+      const product = this.products.find((product) => product.id === id);
+      this.cart.push(product);
     },
   },
 };

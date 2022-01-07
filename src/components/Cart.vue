@@ -3,48 +3,15 @@
 
   <div :class="['cart', show ? 'showElement' : 'hideElement']">
     <div class="cart__header">
-      <h3 class="cart__header__title">Cart(3)</h3>
+      <h3 class="cart__header__title">Cart({{ cart.length }})</h3>
       <button class="cart__header__btn">Remove all</button>
     </div>
     <div class="products">
-      <div class="products__item">
-        <img
-          src="../assets/product-xx99-mark-one-headphones/mobile/image-product.jpg"
-          alt=""
-        />
+      <div class="products__item" v-for="product in cart" :key="product.id">
+        <img :src="editSrc(product)" alt="" />
         <div class="products__item__info">
-          <h4>XX99 MK II</h4>
-          <p>$2,999</p>
-        </div>
-        <div class="products__item__quantity">
-          <button class="less">-</button>
-          <p class="value">1</p>
-          <button class="more">+</button>
-        </div>
-      </div>
-      <div class="products__item">
-        <img
-          src="../assets/product-xx99-mark-one-headphones/mobile/image-product.jpg"
-          alt=""
-        />
-        <div class="products__item__info">
-          <h4>XX99 MK II</h4>
-          <p>$2,999</p>
-        </div>
-        <div class="products__item__quantity">
-          <button class="less">-</button>
-          <p class="value">1</p>
-          <button class="more">+</button>
-        </div>
-      </div>
-      <div class="products__item">
-        <img
-          src="../assets/product-xx99-mark-one-headphones/mobile/image-product.jpg"
-          alt=""
-        />
-        <div class="products__item__info">
-          <h4>XX99 MK II</h4>
-          <p>$2,999</p>
+          <h4>{{ product.name }}</h4>
+          <p>{{ product.price }}</p>
         </div>
         <div class="products__item__quantity">
           <button class="less">-</button>
@@ -55,7 +22,7 @@
     </div>
     <div class="cart__total">
       <h4>Total</h4>
-      <p>$5,396</p>
+      <p>${{ total }}</p>
     </div>
     <button class="cart__btn default-btn">Checkout</button>
   </div>
@@ -64,7 +31,19 @@
 <script>
 export default {
   name: "Cart",
-  props: { show: Boolean },
+  props: { show: Boolean, cart: Array },
+  methods: {
+    editSrc(product) {
+      return require(`../${product.image.mobile.slice(2)}`);
+    },
+  },
+  computed: {
+    total() {
+      let totalValue = 0;
+      this.cart.forEach((product) => (totalValue += product.price));
+      return totalValue;
+    },
+  },
 };
 </script>
 
@@ -144,6 +123,7 @@ export default {
       }
 
       &__info {
+        width: 7.6rem;
         h4 {
           font-weight: 700;
           font-size: 1.5rem;
