@@ -4,25 +4,31 @@
   <div :class="['cart', show ? 'showElement' : 'hideElement']">
     <div class="cart__header">
       <h3 class="cart__header__title">Cart({{ cart.length }})</h3>
-      <button class="cart__header__btn">Remove all</button>
+      <button class="cart__header__btn" @click="$emit('empty-cart')">
+        Remove all
+      </button>
     </div>
     <div class="products">
       <div class="products__item" v-for="product in cart" :key="product.id">
         <img :src="editSrc(product)" alt="" />
         <div class="products__item__info">
           <h4>{{ product.name }}</h4>
-          <p>{{ product.price }}</p>
+          <p>{{ separator(product.price) }}</p>
         </div>
         <div class="products__item__quantity">
-          <button class="less">-</button>
-          <p class="value">1</p>
-          <button class="more">+</button>
+          <button class="less" @click="changeQuantity('subtract', product.id)">
+            -
+          </button>
+          <p class="value">{{ product.addedQuantity }}</p>
+          <button class="more" @click="changeQuantity('add', product.id)">
+            +
+          </button>
         </div>
       </div>
     </div>
     <div class="cart__total">
       <h4>Total</h4>
-      <p>${{ total }}</p>
+      <p>${{ separator(total) }}</p>
     </div>
     <button class="cart__btn default-btn">Checkout</button>
   </div>
@@ -36,11 +42,25 @@ export default {
     editSrc(product) {
       return require(`../${product.image.mobile.slice(2)}`);
     },
+    separator(numb) {
+      var str = numb.toString().split(".");
+      str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return str.join(".");
+    },
+    changeQuantity(operation, id) {
+      const data = {
+        productId: id,
+        operation: operation,
+      };
+      this.$emit("change-quantity", data);
+    },
   },
   computed: {
     total() {
       let totalValue = 0;
-      this.cart.forEach((product) => (totalValue += product.price));
+      this.cart.forEach(
+        (product) => (totalValue += product.price * product.addedQuantity)
+      );
       return totalValue;
     },
   },

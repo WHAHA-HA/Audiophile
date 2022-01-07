@@ -2,7 +2,7 @@
   <article class="card">
     <img :src="editSrc" alt="" class="card__image" />
     <h4 class="card__title">{{ product.name }}</h4>
-    <router-link :to="`/product/${product.slug}`" @click="scrollToTop">
+    <router-link :to="`/product/${product.slug}`" @click="clickHandler">
       <button class="card__btn default-btn">See product</button>
     </router-link>
   </article>
@@ -30,6 +30,10 @@ export default {
     },
     scrollToTop() {
       window.scrollTo(0, 0);
+    },
+    clickHandler() {
+      this.scrollToTop();
+      this.$emit("reset-total");
     },
   },
   computed: {

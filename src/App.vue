@@ -5,7 +5,12 @@
     @toggle-menu-show="toggleMenu"
     ref="mobileMenu"
   />
-  <Cart :show="showCart" :cart="cart" />
+  <Cart
+    :show="showCart"
+    :cart="cart"
+    @change-quantity="changeQuantity"
+    @empty-cart="emptyCart"
+  />
   <div :class="['wrapper', showMenu || showCart ? 'stop-scroll' : '']">
     <router-view @toggle-menu-show="toggleMenu" @add-to-cart="addToCart" />
     <Footer />
@@ -42,10 +47,47 @@ export default {
       }
       this.scrollTop = !this.scrollTop;
     },
-    addToCart(id) {
-      console.log(id);
-      const product = this.products.find((product) => product.id === id);
-      this.cart.push(product);
+    addToCart(data) {
+      console.log(data);
+      let product = this.products.find(
+        (product) => product.id === data.productId
+      );
+      if (this.cart.find((prod) => prod.id === product.id)) {
+        const index = this.cart.findIndex((prod) => prod.id === product.id);
+        this.cart[index] = {
+          ...this.cart[index],
+          addedQuantity: this.cart[index].addedQuantity + data.addedQuantity,
+        };
+      } else {
+        product = { ...product, addedQuantity: data.addedQuantity };
+        console.log("product", product);
+        this.cart.push(product);
+      }
+    },
+    changeQuantity(data) {
+      console.log("productId", data.productId);
+      const index = this.cart.findIndex((prod) => prod.id === data.productId);
+      if (data.operation === "subtract") {
+        if (this.cart[index].addedQuantity === 1) {
+          console.log("hello");
+          this.cart = this.cart
+            .slice()
+            .filter((prod) => prod.id !== data.productId);
+        } else {
+          this.cart[index] = {
+            ...this.cart[index],
+            addedQuantity: this.cart[index].addedQuantity - 1,
+          };
+        }
+      } else if (data.operation === "add") {
+        this.cart[index] = {
+          ...this.cart[index],
+          addedQuantity: this.cart[index].addedQuantity + 1,
+        };
+      }
+    },
+    emptyCart() {
+      this.cart = [];
     },
   },
 };

@@ -33,7 +33,7 @@
           </div>
           <button
             class="overview__text__btn-section__btn default-btn"
-            @click="$emit('add-to-cart', currentProduct.id)"
+            @click="addToCartHandler"
           >
             Add to cart
           </button>
@@ -83,6 +83,7 @@
           v-for="product in currentProduct.others"
           :key="product.name"
           :product="product"
+          @reset-total="resetTotal"
         />
       </div>
     </section>
@@ -115,6 +116,16 @@ export default {
       if (this.total > 1) {
         this.total--;
       }
+    },
+    addToCartHandler() {
+      const data = {
+        productId: this.currentProduct.id,
+        addedQuantity: this.total,
+      };
+      this.$emit("add-to-cart", data);
+    },
+    resetTotal() {
+      this.total = 1;
     },
     setWindowSize() {
       let windowWidth = window.innerWidth;
