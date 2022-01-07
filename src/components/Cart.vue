@@ -136,7 +136,6 @@ export default {
   .products {
     margin: 3.2rem 0;
     width: 100%;
-    height: 24rem;
     max-height: 26rem;
     overflow-y: auto;
     &__item {

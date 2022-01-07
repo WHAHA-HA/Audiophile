@@ -31,7 +31,7 @@ export default {
       showMenu: false,
       showCart: false,
       scrollTop: false,
-      cart: [],
+      cart: JSON.parse(localStorage.getItem("cart")),
       products: data,
     };
   },
@@ -46,6 +46,9 @@ export default {
         this.showCart = !this.showCart;
       }
       this.scrollTop = !this.scrollTop;
+    },
+    storeCart() {
+      localStorage.setItem("cart", JSON.stringify(this.cart));
     },
     addToCart(data) {
       console.log(data);
@@ -63,6 +66,7 @@ export default {
         console.log("product", product);
         this.cart.push(product);
       }
+      this.storeCart();
     },
     changeQuantity(data) {
       console.log("productId", data.productId);
@@ -85,10 +89,20 @@ export default {
           addedQuantity: this.cart[index].addedQuantity + 1,
         };
       }
+      this.storeCart();
     },
     emptyCart() {
       this.cart = [];
+      this.storeCart();
     },
+  },
+  created() {
+    let storedCart = localStorage.getItem("cart");
+    storedCart = JSON.parse(storedCart);
+    console.log("storedCart", storedCart);
+    if (!storedCart) {
+      localStorage.setItem("cart", JSON.stringify(this.cart));
+    }
   },
 };
 </script>
