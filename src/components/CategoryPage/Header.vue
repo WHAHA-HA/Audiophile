@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <Navbar />
+    <Navbar @toggle-menu-show="$emit('toggle-menu-show', $event)" />
     <Heading :category="category" />
   </header>
 </template>
@@ -13,6 +13,7 @@ export default {
   name: "Hero",
   components: { Navbar, Heading },
   props: { category: String },
+  emits: ["toggle-menu-show"],
 };
 </script>
 

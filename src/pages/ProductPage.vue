@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <Header @toggle-menu-show="$emit('toggle-menu-show', $event)" />
   <main>
     <p class="back-link" @click="$router.back()">Go back</p>
     <section class="overview">
@@ -96,6 +96,7 @@ import OthersCard from "../components/ProductPage/OthersCard.vue";
 export default {
   name: "ProductPage",
   components: { Header, ProductPageNavigation, OthersCard },
+  emits: ["toggle-menu-show"],
   data() {
     return {
       total: 1,

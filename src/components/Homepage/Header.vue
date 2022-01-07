@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <Navbar />
+    <Navbar @toggle-menu-show="$emit('toggle-menu-show', $event)" />
     <Hero />
   </header>
 </template>
@@ -12,6 +12,12 @@ import Hero from "./Hero.vue";
 export default {
   name: "Header",
   components: { Navbar, Hero },
+  emits: ["toggle-menu-show"],
+  methods: {
+    clickHandler() {
+      console.log();
+    },
+  },
 };
 </script>
 

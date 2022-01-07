@@ -1,16 +1,39 @@
 <template>
-  <div class="wrapper">
-    <router-view />
+  <Menu
+    :show="show"
+    :scrollTop="scrollTop"
+    @toggle-menu-show="toggleMenu"
+    ref="mobileMenu"
+  />
+  <div :class="['wrapper', show ? 'stop-scroll' : '']">
+    <router-view @toggle-menu-show="toggleMenu" />
     <Footer />
   </div>
 </template>
 
 <script>
 import Footer from "./components/Footer.vue";
+import Menu from "./components/Menu.vue";
 
 export default {
   name: "App",
-  components: { Footer },
+  components: { Footer, Menu },
+  data() {
+    return {
+      show: false,
+      scrollTop: false,
+    };
+  },
+  methods: {
+    toggleMenu(myVar) {
+      if (myVar === "logo") {
+        this.show = this.show ? false : true;
+      } else {
+        this.show = !this.show;
+      }
+      this.scrollTop = !this.scrollTop;
+    },
+  },
 };
 </script>
 
@@ -62,5 +85,10 @@ button {
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
+}
+
+.stop-scroll {
+  max-height: calc(100vh - 9.1rem);
+  overflow: hidden;
 }
 </style>

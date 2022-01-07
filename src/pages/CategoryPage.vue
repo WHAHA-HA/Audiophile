@@ -1,5 +1,8 @@
 <template>
-  <Header :category="category" />
+  <Header
+    :category="category"
+    @toggle-menu-show="$emit('toggle-menu-show', $event)"
+  />
   <Product
     v-for="product in sortedProducts"
     :key="product.id"
@@ -17,6 +20,7 @@ import jsonData from "../data.json";
 export default {
   name: "CategoryPage",
   components: { ProductPageNavigation, Header, Product },
+  emits: ["toggle-menu-show"],
   data() {
     return {
       productInfo: jsonData,

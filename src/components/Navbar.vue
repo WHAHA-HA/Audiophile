@@ -1,7 +1,14 @@
 <template>
   <nav class="navbar">
-    <button class="navbar__mobile-menu-btn"></button>
-    <router-link to="/" class="navbar__homeLink">
+    <button
+      class="navbar__mobile-menu-btn"
+      @click="$emit('toggle-menu-show', 'normal')"
+    ></button>
+    <router-link
+      @click="$emit('toggle-menu-show', 'logo')"
+      to="/"
+      class="navbar__homeLink"
+    >
       <img
         src="../assets/shared/desktop/logo.svg"
         alt="audiophile logo"
@@ -22,6 +29,10 @@
 <script>
 export default {
   name: "Navbar",
+  data() {
+    return { myVar: "hello" };
+  },
+  emits: ["toggle-menu-show"],
 };
 </script>
 
@@ -34,6 +45,7 @@ export default {
   padding: 3.2rem 2.4rem;
   position: relative;
   border-bottom: 0.1rem solid #353535;
+  z-index: 3;
 
   @media (min-width: 768px) {
     justify-content: flex-start;

@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <Navbar />
+    <Navbar @toggle-menu-show="$emit('toggle-menu-show', $event)" />
   </header>
 </template>
 
@@ -10,6 +10,7 @@ import Navbar from "../Navbar.vue";
 export default {
   name: "Header",
   components: { Navbar },
+  emits: ["toggle-menu-show"],
 };
 </script>
 

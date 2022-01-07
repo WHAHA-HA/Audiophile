@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <Header @toggle-menu-show="$emit('toggle-menu-show', $event)" />
   <main>
     <section class="categories">
       <Category product="headphones" />
@@ -31,6 +31,7 @@ export default {
     YX1Preview,
     AboutSection,
   },
+  emits: ["toggle-menu-show"],
 };
 </script>
 
