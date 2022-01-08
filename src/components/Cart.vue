@@ -16,7 +16,7 @@
             <h4>
               {{ product.slug.slice(0, product.slug.indexOf("-")) }}
             </h4>
-            <p>{{ separator(product.price) }}</p>
+            <p>$ {{ separator(product.price) }}</p>
           </div>
         </div>
         <div class="products__item__quantity">

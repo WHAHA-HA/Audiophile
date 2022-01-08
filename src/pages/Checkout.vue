@@ -100,15 +100,18 @@
         </div>
       </section>
     </form>
+    <Summary :cart="cart" />
   </main>
 </template>
 
 <script>
 import Header from "../components/ProductPage/Header.vue";
+import Summary from "../components/Checkout/Summary.vue";
 
 export default {
   name: "Checkout",
-  components: { Header },
+  components: { Header, Summary },
+  props: { cart: Array },
   data() {
     return {
       picked: "e-money",

@@ -13,7 +13,11 @@
     @toggle-menu-show="toggleMenu"
   />
   <div :class="['wrapper', showMenu || showCart ? 'stop-scroll' : '']">
-    <router-view @toggle-menu-show="toggleMenu" @add-to-cart="addToCart" />
+    <router-view
+      @toggle-menu-show="toggleMenu"
+      @add-to-cart="addToCart"
+      :cart="cart"
+    />
     <Footer />
   </div>
 </template>
