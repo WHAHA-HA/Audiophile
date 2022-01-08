@@ -244,6 +244,7 @@ main {
   margin: 1.6rem 0 2.4rem 0;
   display: block;
   cursor: pointer;
+  transition: all 0.3s ease;
 
   &:hover {
     color: rgba(216, 125, 74, 1);
@@ -380,6 +381,8 @@ main {
 
         & button {
           color: #b5b5b5;
+          transition: all 0.3s ease;
+
           &:hover {
             color: rgba(216, 125, 74, 1);
           }

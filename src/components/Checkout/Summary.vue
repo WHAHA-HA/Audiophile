@@ -41,34 +41,6 @@
 export default {
   name: "Summary",
   props: { cart: Array },
-  data() {
-    return { shipping: 50 };
-  },
-  methods: {
-    editSrc(product) {
-      return require(`../../${product.image.mobile.slice(2)}`);
-    },
-    separator(numb) {
-      var str = numb.toString().split(".");
-      str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      return str.join(".");
-    },
-  },
-  created() {
-    console.log("cart", this.cart);
-  },
-  computed: {
-    total() {
-      let totalValue = 0;
-      this.cart.forEach(
-        (product) => (totalValue += product.price * product.addedQuantity)
-      );
-      return totalValue;
-    },
-    vat() {
-      return (0.2 * this.total).toFixed(2);
-    },
-  },
 };
 </script>
 

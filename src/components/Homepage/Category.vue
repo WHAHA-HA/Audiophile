@@ -129,6 +129,7 @@ export default {
     text-transform: uppercase;
     display: flex;
     align-items: center;
+    transition: all 0.3s ease;
 
     &:hover {
       color: #d87d4a;

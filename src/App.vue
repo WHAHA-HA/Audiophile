@@ -121,7 +121,6 @@ export default {
   padding: 0;
   box-sizing: border-box;
   font-family: "Manrope", sans-serif;
-  transition: all 0.3s ease;
 }
 
 html {
@@ -150,6 +149,7 @@ button {
   letter-spacing: 0.1rem;
   border: none;
   padding: 1.5rem 3rem;
+  transition: all 0.3s ease;
 
   &:hover {
     background: #f6af85;

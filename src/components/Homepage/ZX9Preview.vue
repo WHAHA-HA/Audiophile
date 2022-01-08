@@ -136,6 +136,7 @@ export default {
     &__link {
       &__btn {
         background: black;
+        transition: all 0.3s ease;
 
         &:hover {
           background: #4c4c4c;

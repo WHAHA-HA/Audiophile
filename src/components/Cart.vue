@@ -137,6 +137,7 @@ export default {
       background: none;
       color: #808080;
       text-decoration: underline;
+      transition: all 0.3s ease;
 
       &:hover {
         color: rgba(216, 125, 74, 1);
@@ -232,6 +233,7 @@ export default {
           width: 3.2rem;
           color: #b5b5b5;
           height: 3.2rem;
+          transition: all 0.3s ease;
 
           &:hover {
             color: rgba(216, 125, 74, 1);

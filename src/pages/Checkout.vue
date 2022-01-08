@@ -52,6 +52,7 @@
                   'radio-container',
                   picked === 'e-money' ? 'orange-border' : '',
                 ]"
+                @click="selectMethod('e-money')"
               >
                 <input
                   type="radio"
@@ -68,6 +69,7 @@
                   'radio-container',
                   picked === 'cash' ? 'orange-border' : '',
                 ]"
+                @click="selectMethod('cash')"
               >
                 <input
                   type="radio"
@@ -100,6 +102,14 @@
           >
             <label for="emoney-pin" class="no-capitalize">e-Money PIN</label>
             <input type="number" name="emoney-pin" id="emoney-pin" required />
+          </div>
+          <div class="cash-info" v-show="picked === 'cash'">
+            <i class="fas fa-money-bill-wave cash-info__icon"></i>
+            <p class="cash-info__text">
+              The ‘Cash on Delivery’ option enables you to pay in cash when our
+              delivery courier arrives at your residence. Just make sure your
+              address is correct so that your order will not be cancelled.
+            </p>
           </div>
         </section>
       </div>
@@ -139,7 +149,11 @@
             </p>
           </div>
         </div>
-        <input type="submit" value="Continue & pay" class="btn default-btn" />
+        <input
+          type="submit"
+          :value="picked === 'e-money' ? 'Continue & pay' : 'Continue'"
+          class="btn default-btn"
+        />
       </div>
     </form>
   </main>
@@ -166,6 +180,9 @@ export default {
       var str = numb.toString().split(".");
       str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       return str.join(".");
+    },
+    selectMethod(method) {
+      this.picked = method;
     },
   },
   created() {
@@ -203,6 +220,7 @@ input::-webkit-inner-spin-button {
   display: block;
   cursor: pointer;
   width: 32.7rem;
+  transition: all 0.3s ease;
 
   &:hover {
     color: rgba(216, 125, 74, 1);
@@ -371,6 +389,11 @@ input::-webkit-inner-spin-button {
           color: #999999;
           border: 0.1rem solid #d5d5d5;
           caret-color: #dd8d61;
+          transition: all 0.3s ease;
+
+          &:hover {
+            border-color: #dd8d61;
+          }
 
           @media (min-width: 768px) {
             width: 30.9rem;
@@ -390,6 +413,16 @@ input::-webkit-inner-spin-button {
           width: 28rem;
           height: 5.6rem;
           margin-top: 1.6rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          * {
+            cursor: pointer;
+          }
+
+          &:hover {
+            border-color: #dd8d61;
+          }
         }
 
         input[type="radio"] {
@@ -434,6 +467,29 @@ input::-webkit-inner-spin-button {
 
         .no-capitalize {
           text-transform: none;
+        }
+      }
+
+      .cash-info {
+        display: flex;
+        align-items: flex-start;
+        margin-top: 3rem;
+
+        @media (min-width: 768px) {
+          align-items: center;
+        }
+
+        &__icon {
+          font-size: 3rem;
+          color: rgba(216, 125, 74, 1);
+          margin-right: 3.2rem;
+        }
+
+        &__text {
+          font-size: 1.5rem;
+          font-weight: 500;
+          line-height: 2.5rem;
+          color: #808080;
         }
       }
     }
@@ -582,6 +638,7 @@ input::-webkit-inner-spin-button {
       .btn {
         width: 100%;
         margin-top: 3.2rem;
+        cursor: pointer;
       }
     }
   }

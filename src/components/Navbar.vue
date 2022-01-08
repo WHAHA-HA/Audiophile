@@ -104,6 +104,7 @@ export default {
         letter-spacing: 0.2rem;
         text-transform: uppercase;
         margin-left: 3.4rem;
+        transition: all 0.3s ease;
 
         &:first-child {
           margin-left: 0;

@@ -159,6 +159,10 @@ export default {
           letter-spacing: 0.2rem;
           text-transform: uppercase;
 
+          * {
+            transition: all 0.3s ease;
+          }
+
           @media (min-width: 768px) {
             margin: 0;
             margin-right: 3.4rem;
@@ -224,6 +228,10 @@ export default {
 
         &__link {
           margin-right: 1.6rem;
+
+          & i {
+            transition: all 0.3s ease;
+          }
 
           &:hover i {
             color: #d87d4a;

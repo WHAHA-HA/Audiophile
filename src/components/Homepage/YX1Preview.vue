@@ -84,6 +84,7 @@ export default { name: "YX1Preview" };
       background: none;
       color: black;
       border: 0.2rem solid black;
+      transition: all 0.3s ease;
 
       &:hover {
         background: black;
