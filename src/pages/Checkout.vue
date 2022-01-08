@@ -2,49 +2,49 @@
   <Header />
   <main class="checkout">
     <p class="back-link" @click="$router.back()">Go back</p>
-    <div class="content">
-      <form class="checkout__form">
-        <h1 class="checkout__form__heading">Checkout</h1>
-        <h2 class="checkout__form__subheading">Billing details</h2>
+    <form class="checkout__form">
+      <div class="checkout__form__input">
+        <h1 class="checkout__form__input__heading">Checkout</h1>
+        <h2 class="checkout__form__input__subheading">Billing details</h2>
 
         <section>
-          <div class="checkout__form__item">
+          <div class="checkout__form__input__item">
             <label for="name">Name</label>
             <input type="text" name="name" id="name" required />
           </div>
-          <div class="checkout__form__item no-margin">
+          <div class="checkout__form__input__item no-margin">
             <label for="email">Email address</label>
             <input type="email" name="email" id="email" required />
           </div>
-          <div class="checkout__form__item">
+          <div class="checkout__form__input__item">
             <label for="phone">Phone number</label>
             <input type="tel" name="phone" id="phone" required />
           </div>
         </section>
-        <h2 class="checkout__form__subheading">Shipping info</h2>
+        <h2 class="checkout__form__input__subheading">Shipping info</h2>
 
         <section>
-          <div class="checkout__form__item no-margin full-span">
+          <div class="checkout__form__input__item no-margin full-span">
             <label for="address">Your address</label>
             <input type="text" name="address" id="address" required />
           </div>
-          <div class="checkout__form__item">
+          <div class="checkout__form__input__item">
             <label for="zip">ZIP code</label>
             <input type="text" pattern="[0-9]*" name="zip" id="zip" required />
           </div>
-          <div class="checkout__form__item no-margin">
+          <div class="checkout__form__input__item no-margin">
             <label for="city">City</label>
             <input type="text" name="city" id="city" required />
           </div>
-          <div class="checkout__form__item">
+          <div class="checkout__form__input__item">
             <label for="country">Country</label>
             <input type="text" name="country" id="country" required />
           </div>
         </section>
-        <h2 class="checkout__form__subheading">Payment details</h2>
+        <h2 class="checkout__form__input__subheading">Payment details</h2>
 
         <section>
-          <div class="checkout__form__item payment-method">
+          <div class="checkout__form__input__item payment-method">
             <h3 class="label">Payment method</h3>
             <div class="methods">
               <div
@@ -80,7 +80,10 @@
               </div>
             </div>
           </div>
-          <div class="checkout__form__item" v-show="picked === 'e-money'">
+          <div
+            class="checkout__form__input__item"
+            v-show="picked === 'e-money'"
+          >
             <label for="emoney-number" class="no-capitalize"
               >e-Money Number</label
             >
@@ -92,31 +95,93 @@
             />
           </div>
           <div
-            class="checkout__form__item no-margin"
+            class="checkout__form__input__item no-margin"
             v-show="picked === 'e-money'"
           >
             <label for="emoney-pin" class="no-capitalize">e-Money PIN</label>
             <input type="number" name="emoney-pin" id="emoney-pin" required />
           </div>
         </section>
-      </form>
-      <Summary :cart="cart" />
-    </div>
+      </div>
+      <div class="checkout__form__summary">
+        <h2 class="checkout__form__summary__heading">Summary</h2>
+        <div class="products">
+          <div class="products__item" v-for="product in cart" :key="product.id">
+            <div class="products__item__left">
+              <img :src="editSrc(product)" alt="" />
+              <div class="products__item__left__info">
+                <h4>
+                  {{ product.slug.slice(0, product.slug.indexOf("-")) }}
+                </h4>
+                <p>$ {{ separator(product.price) }}</p>
+              </div>
+            </div>
+            <p class="products__item__quantity">x{{ product.addedQuantity }}</p>
+          </div>
+        </div>
+        <div class="price">
+          <div class="price__detail">
+            <h4 class="price__detail__title">Total</h4>
+            <p class="price__detail__value">$ {{ separator(total) }}</p>
+          </div>
+          <div class="price__detail">
+            <h4 class="price__detail__title">Shipping</h4>
+            <p class="price__detail__value">$ {{ shipping }}</p>
+          </div>
+          <div class="price__detail">
+            <h4 class="price__detail__title">VAT (included)</h4>
+            <p class="price__detail__value">$ {{ separator(vat) }}</p>
+          </div>
+          <div class="price__detail grand-total">
+            <h4 class="price__detail__title">Grand total</h4>
+            <p class="price__detail__value">
+              $ {{ separator(total + shipping) }}
+            </p>
+          </div>
+        </div>
+        <input type="submit" value="Continue & pay" class="btn default-btn" />
+      </div>
+    </form>
   </main>
 </template>
 
 <script>
 import Header from "../components/ProductPage/Header.vue";
-import Summary from "../components/Checkout/Summary.vue";
 
 export default {
   name: "Checkout",
-  components: { Header, Summary },
+  components: { Header },
   props: { cart: Array },
   data() {
     return {
       picked: "e-money",
+      shipping: 50,
     };
+  },
+  methods: {
+    editSrc(product) {
+      return require(`../${product.image.mobile.slice(2)}`);
+    },
+    separator(numb) {
+      var str = numb.toString().split(".");
+      str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return str.join(".");
+    },
+  },
+  created() {
+    console.log("cart", this.cart);
+  },
+  computed: {
+    total() {
+      let totalValue = 0;
+      this.cart.forEach(
+        (product) => (totalValue += product.price * product.addedQuantity)
+      );
+      return totalValue;
+    },
+    vat() {
+      return (0.2 * this.total).toFixed(2);
+    },
   },
 };
 </script>
@@ -159,7 +224,9 @@ input::-webkit-inner-spin-button {
   background: #fafafa;
   width: 100%;
 
-  .content {
+  &__form {
+    background: transparent;
+
     @media (min-width: 1205px) {
       display: flex;
       width: 111rem;
@@ -167,23 +234,10 @@ input::-webkit-inner-spin-button {
       margin-top: 3.7rem;
       margin-bottom: 14.1rem;
     }
-  }
 
-  &__form {
-    margin: 2.4rem auto 0 auto;
-    background: white;
-    padding: 2.4rem 2.4rem 3.1rem 2.4rem;
-    border-radius: 0.8rem;
-    width: 32.7rem;
-
-    @media (min-width: 768px) {
-      width: 68.9rem;
-      padding: 3rem 2.7rem;
-    }
-
-    @media (min-width: 1205px) {
-      width: 73rem;
-      margin-top: 0;
+    &__input,
+    &__summary {
+      background: white;
     }
 
     section {
@@ -231,138 +285,303 @@ input::-webkit-inner-spin-button {
       }
     }
 
-    &__heading {
-      font-weight: 700;
-      font-size: 2.8rem;
-      line-height: 3.825rem;
-      letter-spacing: 0.1rem;
-      text-transform: uppercase;
+    &__input {
+      width: 32.7rem;
+      margin: 2.4rem auto 0 auto;
+      padding: 2.4rem 2.4rem 3.1rem 2.4rem;
+      border-radius: 0.8rem;
 
       @media (min-width: 768px) {
-        font-size: 3.2rem;
-        line-height: 3.6rem;
-        letter-spacing: 0.114rem;
-      }
-    }
-
-    &__subheading {
-      margin-top: 3.2rem;
-      text-transform: uppercase;
-      font-size: 1.3rem;
-      font-weight: 700;
-      line-height: 2.5rem;
-      letter-spacing: 0.093rem;
-      color: rgba(216, 125, 74, 1);
-      margin-bottom: 1.6rem;
-
-      @media (min-width: 768px) {
-        margin-top: 4.1rem;
-      }
-    }
-
-    &__item {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-top: 2.4rem;
-
-      &:first-child {
-        margin-top: 0;
+        width: 68.9rem;
+        padding: 3rem 2.7rem;
       }
 
-      @media (min-width: 768px) {
+      @media (min-width: 1205px) {
         margin: 0;
-        margin-bottom: 2.4rem;
-        margin-right: 1.6rem;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
       }
 
-      label,
-      .label {
-        margin-bottom: 0.9rem;
+      &__heading {
         font-weight: 700;
-        font-size: 1.2rem;
-        line-height: 1.639rem;
-        letter-spacing: -0.021rem;
-        text-transform: capitalize;
-      }
-
-      input {
-        width: 28rem;
-        height: 5.6rem;
-        font-size: 1.4rem;
-        font-weight: 700;
-        line-height: 1.912rem;
-        letter-spacing: -0.025rem;
-        padding-left: 2.4rem;
-        border-radius: 0.8rem;
-        color: #999999;
-        border: 0.1rem solid #d5d5d5;
+        font-size: 2.8rem;
+        line-height: 3.825rem;
+        letter-spacing: 0.1rem;
+        text-transform: uppercase;
 
         @media (min-width: 768px) {
-          width: 30.9rem;
-        }
-
-        &:focus {
-          outline: none;
+          font-size: 3.2rem;
+          line-height: 3.6rem;
+          letter-spacing: 0.114rem;
         }
       }
 
-      .radio-container {
+      &__subheading {
+        margin-top: 3.2rem;
+        text-transform: uppercase;
+        font-size: 1.3rem;
+        font-weight: 700;
+        line-height: 2.5rem;
+        letter-spacing: 0.093rem;
+        color: rgba(216, 125, 74, 1);
+        margin-bottom: 1.6rem;
+
+        @media (min-width: 768px) {
+          margin-top: 4.1rem;
+        }
+      }
+
+      &__item {
         display: flex;
-        align-items: center;
-        border-radius: 0.8rem;
-        border: 0.1rem solid #d5d5d5;
-        width: 28rem;
-        height: 5.6rem;
-        margin-top: 1.6rem;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 2.4rem;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        @media (min-width: 768px) {
+          margin: 0;
+          margin-bottom: 2.4rem;
+          margin-right: 1.6rem;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        label,
+        .label {
+          margin-bottom: 0.9rem;
+          font-weight: 700;
+          font-size: 1.2rem;
+          line-height: 1.639rem;
+          letter-spacing: -0.021rem;
+          text-transform: capitalize;
+        }
+
+        input {
+          width: 28rem;
+          height: 5.6rem;
+          font-size: 1.4rem;
+          font-weight: 700;
+          line-height: 1.912rem;
+          letter-spacing: -0.025rem;
+          padding-left: 2.4rem;
+          border-radius: 0.8rem;
+          color: #999999;
+          border: 0.1rem solid #d5d5d5;
+          caret-color: #dd8d61;
+
+          @media (min-width: 768px) {
+            width: 30.9rem;
+          }
+
+          &:focus {
+            outline: none;
+            border-color: #dd8d61;
+          }
+        }
+
+        .radio-container {
+          display: flex;
+          align-items: center;
+          border-radius: 0.8rem;
+          border: 0.1rem solid #d5d5d5;
+          width: 28rem;
+          height: 5.6rem;
+          margin-top: 1.6rem;
+        }
+
+        input[type="radio"] {
+          display: none;
+        }
+
+        input[type="radio"] + *::before {
+          content: "";
+          display: inline-block;
+          vertical-align: bottom;
+          width: 2rem;
+          height: 2rem;
+          margin-right: 1.6rem;
+          border-radius: 50%;
+          border-style: solid;
+          border-width: 0.1rem;
+          border-color: #d5d5d5;
+          cursor: pointer;
+        }
+
+        input[type="radio"]:checked + *::before {
+          background: radial-gradient(
+            rgba(216, 125, 74, 1) 0%,
+            rgba(216, 125, 74, 1) 40%,
+            transparent 50%,
+            transparent
+          );
+          border-color: #d5d5d5;
+        }
+
+        .radio-label {
+          margin-bottom: 0;
+          margin-left: 2.1rem;
+          text-transform: none;
+          display: flex;
+          align-items: center;
+        }
+
+        .orange-border {
+          border-color: rgba(216, 125, 74, 1) !important;
+        }
+
+        .no-capitalize {
+          text-transform: none;
+        }
+      }
+    }
+
+    &__summary {
+      margin: 3.2rem auto 9.7rem auto;
+      background: white;
+      border-radius: 0.8rem;
+      width: 32.7rem;
+      padding: 3.2rem 2.4rem;
+
+      @media (min-width: 768px) {
+        width: 68.9rem;
+        padding: 3.2rem 3.3rem;
+        margin-bottom: 11.6rem;
       }
 
-      input[type="radio"] {
-        display: none;
+      @media (min-width: 1205px) {
+        width: 35rem;
+        margin-top: 0;
+        height: 61.2rem;
       }
 
-      input[type="radio"] + *::before {
-        content: "";
-        display: inline-block;
-        vertical-align: bottom;
-        width: 2rem;
-        height: 2rem;
-        margin-right: 1.6rem;
-        border-radius: 50%;
-        border-style: solid;
-        border-width: 0.1rem;
-        border-color: #d5d5d5;
-        cursor: pointer;
+      &__heading {
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 1.8rem;
+        line-height: 2.459rem;
+        letter-spacing: 0.129rem;
+        margin-bottom: 3.1rem;
       }
 
-      input[type="radio"]:checked + *::before {
-        background: radial-gradient(
-          rgba(216, 125, 74, 1) 0%,
-          rgba(216, 125, 74, 1) 40%,
-          transparent 50%,
-          transparent
-        );
-        border-color: #d5d5d5;
+      .products {
+        @media (min-width: 1205px) {
+          height: 24rem;
+          overflow-y: auto;
+          overflow-x: hidden;
+          padding-right: 1rem;
+
+          &::-webkit-scrollbar {
+            width: 0.7rem;
+          }
+
+          &::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 1rem;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: rgb(49, 49, 49);
+            border-radius: 1rem;
+          }
+
+          &::-webkit-scrollbar-thumb:hover {
+            background: black;
+          }
+        }
+
+        &__item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 2.4rem;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          &__left {
+            display: flex;
+            align-items: center;
+
+            img {
+              width: 6.4rem;
+              height: 6.4rem;
+              border-radius: 0.8rem;
+            }
+
+            &__info {
+              margin-left: 1.6rem;
+
+              h4 {
+                font-weight: 700;
+                font-size: 1.5rem;
+                line-height: 2.5rem;
+                text-transform: uppercase;
+              }
+
+              p {
+                font-weight: 700;
+                font-size: 1.4rem;
+                line-height: 2.5rem;
+                color: #909090;
+              }
+            }
+          }
+
+          &__quantity {
+            font-weight: 700;
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            color: #909090;
+          }
+        }
       }
 
-      .radio-label {
-        margin-bottom: 0;
-        margin-left: 2.1rem;
-        text-transform: none;
-        display: flex;
-        align-items: center;
+      .price {
+        margin-top: 3.2rem;
+
+        &__detail {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 0.8rem;
+
+          &:nth-child(3) {
+            margin-bottom: 2.4rem;
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          &__title {
+            text-transform: uppercase;
+            font-weight: 500;
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            color: #a0a0a0;
+          }
+
+          &__value {
+            font-weight: 700;
+            font-size: 1.8rem;
+            line-height: 2.459rem;
+            text-align: right;
+          }
+        }
+        .grand-total {
+          p {
+            color: rgba(216, 125, 74, 1) !important;
+          }
+        }
       }
 
-      .orange-border {
-        border-color: rgba(216, 125, 74, 1) !important;
-      }
-
-      .no-capitalize {
-        text-transform: none;
+      .btn {
+        width: 100%;
+        margin-top: 3.2rem;
       }
     }
   }

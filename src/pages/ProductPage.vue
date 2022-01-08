@@ -379,6 +379,7 @@ main {
         }
 
         & button {
+          color: #b5b5b5;
           &:hover {
             color: rgba(216, 125, 74, 1);
           }

@@ -1,5 +1,5 @@
 <template>
-  <section class="summary">
+  <div class="summary">
     <h2 class="summary__heading">Summary</h2>
     <div class="products">
       <div class="products__item" v-for="product in cart" :key="product.id">
@@ -34,7 +34,7 @@
       </div>
     </div>
     <button class="btn default-btn">Continue & pay</button>
-  </section>
+  </div>
 </template>
 
 <script>

@@ -34,8 +34,13 @@
       <h4>Total</h4>
       <p>${{ separator(total) }}</p>
     </div>
-    <router-link to="/checkout" @click="$emit('toggle-menu-show', 'cart')"
-      ><button class="cart__btn default-btn">Checkout</button></router-link
+    <router-link
+      class="cart__router-link"
+      to="/checkout"
+      @click="$emit('toggle-menu-show', 'cart')"
+      ><button class="cart__router-link__btn default-btn">
+        Checkout
+      </button></router-link
     >
   </div>
 </template>
@@ -132,6 +137,10 @@ export default {
       background: none;
       color: #808080;
       text-decoration: underline;
+
+      &:hover {
+        color: rgba(216, 125, 74, 1);
+      }
     }
   }
 
@@ -223,6 +232,10 @@ export default {
           width: 3.2rem;
           color: #b5b5b5;
           height: 3.2rem;
+
+          &:hover {
+            color: rgba(216, 125, 74, 1);
+          }
         }
 
         .value {
@@ -255,8 +268,11 @@ export default {
     }
   }
 
-  &__btn {
+  &__router-link {
     width: 100%;
+    &__btn {
+      width: 100%;
+    }
   }
 }
 
