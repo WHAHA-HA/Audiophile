@@ -34,7 +34,9 @@
       <h4>Total</h4>
       <p>${{ separator(total) }}</p>
     </div>
-    <button class="cart__btn default-btn">Checkout</button>
+    <router-link to="/checkout" @click="$emit('toggle-menu-show', 'cart')"
+      ><button class="cart__btn default-btn">Checkout</button></router-link
+    >
   </div>
 </template>
 

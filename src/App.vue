@@ -10,6 +10,7 @@
     :cart="cart"
     @change-quantity="changeQuantity"
     @empty-cart="emptyCart"
+    @toggle-menu-show="toggleMenu"
   />
   <div :class="['wrapper', showMenu || showCart ? 'stop-scroll' : '']">
     <router-view @toggle-menu-show="toggleMenu" @add-to-cart="addToCart" />
@@ -43,6 +44,7 @@ export default {
       } else if (myVar === "menu") {
         this.showMenu = !this.showMenu;
       } else if (myVar === "cart") {
+        console.log("hello");
         this.showCart = !this.showCart;
       }
       this.scrollTop = !this.scrollTop;
