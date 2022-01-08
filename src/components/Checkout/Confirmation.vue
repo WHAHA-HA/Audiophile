@@ -16,7 +16,7 @@
                 {{ editedSlug }}
               </h2>
               <p class="product__left__info__price">
-                {{ separator(cart[0].price) }}
+                $ {{ separator(cart[0].price) }}
               </p>
             </div>
           </div>
@@ -28,7 +28,9 @@
       </div>
       <div class="confirmation__order__right">
         <h2 class="confirmation__order__right__heading">Grand total</h2>
-        <p class="confirmation__order__right__total">{{ separator(total) }}</p>
+        <p class="confirmation__order__right__total">
+          $ {{ separator(total) }}
+        </p>
       </div>
     </div>
     <router-link to="/" class="home-link">
@@ -84,6 +86,11 @@ export default {
   border-radius: 0.8rem;
   padding: 3.2rem;
 
+  @media (min-width: 768px) {
+    width: 54rem;
+    padding: 4.8rem;
+  }
+
   &__icon {
     font-size: 6.4rem;
     color: rgba(216, 125, 74, 1);
@@ -96,6 +103,14 @@ export default {
     font-size: 2.4rem;
     line-height: 2.8rem;
     letter-spacing: 0.086rem;
+
+    @media (min-width: 768px) {
+      width: 28.4rem;
+      font-size: 3.2rem;
+      line-height: 3.6rem;
+      letter-spacing: 0.114rem;
+      margin-top: 3.3rem;
+    }
   }
 
   &__text {
@@ -104,6 +119,10 @@ export default {
     font-size: 1.5rem;
     line-height: 2.5rem;
     color: #808080;
+
+    @media (min-width: 768px) {
+      margin-top: 2.4rem;
+    }
   }
 
   &__order {
@@ -111,9 +130,17 @@ export default {
     border-radius: 0.8rem;
     overflow: hidden;
 
+    @media (min-width: 768px) {
+      display: flex;
+    }
+
     &__left {
       padding: 2.4rem;
       background: #f1f1f1;
+
+      @media (min-width: 768px) {
+        width: 24.6rem;
+      }
 
       &__rest {
         margin-top: 1.2rem;
@@ -129,6 +156,13 @@ export default {
     &__right {
       background: black;
       padding: 1.5rem 2.4rem 1.9rem 2.4rem;
+
+      @media (min-width: 768px) {
+        width: 19.8rem;
+        padding: 0;
+        padding-top: 4.1rem;
+        padding-left: 2.4rem;
+      }
 
       &__heading {
         color: #808080;
@@ -154,6 +188,10 @@ export default {
     align-items: center;
     border-bottom: 0.1rem solid #dedede;
     padding-bottom: 1.2rem;
+
+    @media (min-width: 768px) {
+      align-items: flex-start;
+    }
 
     &__left {
       display: flex;
@@ -198,6 +236,10 @@ export default {
     &__btn {
       width: 100%;
       margin-top: 2.3rem;
+
+      @media (min-width: 768px) {
+        margin-top: 4.6rem;
+      }
     }
   }
 }
