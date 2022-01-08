@@ -80,6 +80,12 @@ export default {
   width: 32.7rem;
   padding: 3.2rem 2.4rem;
 
+  @media (min-width: 768px) {
+    width: 68.9rem;
+    padding: 3.2rem 3.3rem;
+    margin-bottom: 11.6rem;
+  }
+
   &__heading {
     text-transform: uppercase;
     font-weight: 700;
