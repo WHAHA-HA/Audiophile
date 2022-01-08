@@ -127,6 +127,26 @@ html {
   font-size: 62.5%;
 }
 
+body {
+  &::-webkit-scrollbar {
+    width: 0.7rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 1rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #d87d4a;
+    border-radius: 1rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #f6af85;
+  }
+}
+
 a {
   text-decoration: none;
 }

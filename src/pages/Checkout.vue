@@ -1,44 +1,176 @@
 <template>
-  <Header />
+  <Header @toggle-menu-show="$emit('toggle-menu-show', $event)" />
   <main class="checkout">
     <p class="back-link" @click="$router.back()">Go back</p>
-    <form class="checkout__form">
+    <form class="checkout__form" @submit.prevent="submitHandler" novalidate>
       <div class="checkout__form__input">
         <h1 class="checkout__form__input__heading">Checkout</h1>
         <h2 class="checkout__form__input__subheading">Billing details</h2>
 
         <section>
           <div class="checkout__form__input__item">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" required />
+            <div class="input-texts">
+              <label
+                for="name"
+                :class="emptyFields.includes('name') ? 'red-label' : ''"
+                >Name</label
+              >
+              <p class="empty-message" v-if="emptyFields.includes('name')">
+                Field can't be empty
+              </p>
+            </div>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              ref="name"
+              :class="emptyFields.includes('name') ? 'empty-border' : ''"
+              @click="wipeError('name')"
+              @change="wipeError('name')"
+              spellcheck="false"
+            />
           </div>
           <div class="checkout__form__input__item no-margin">
-            <label for="email">Email address</label>
-            <input type="email" name="email" id="email" required />
+            <div class="input-texts">
+              <label
+                for="email"
+                :class="emptyFields.includes('email') ? 'red-label' : ''"
+                >Email address</label
+              >
+              <p class="empty-message" v-if="emptyFields.includes('email')">
+                Field can't be empty
+              </p>
+              <p class="empty-message" v-if="invalidEmail">
+                Invalid email address
+              </p>
+            </div>
+
+            <input
+              type="email"
+              name="email"
+              id="email"
+              ref="email"
+              :class="emptyFields.includes('email') ? 'empty-border' : ''"
+              @click="wipeError('email')"
+              @change="wipeError('email')"
+            />
           </div>
           <div class="checkout__form__input__item">
-            <label for="phone">Phone number</label>
-            <input type="tel" name="phone" id="phone" required />
+            <div class="input-texts">
+              <label
+                for="phone"
+                :class="emptyFields.includes('phone') ? 'red-label' : ''"
+                >Phone number</label
+              >
+              <p class="empty-message" v-if="emptyFields.includes('phone')">
+                Field can't be empty
+              </p>
+            </div>
+
+            <input
+              type="tel"
+              name="phone"
+              id="phone"
+              ref="phone"
+              :class="emptyFields.includes('phone') ? 'empty-border' : ''"
+              @click="wipeError('phone')"
+              @change="wipeError('phone')"
+            />
           </div>
         </section>
         <h2 class="checkout__form__input__subheading">Shipping info</h2>
 
         <section>
           <div class="checkout__form__input__item no-margin full-span">
-            <label for="address">Your address</label>
-            <input type="text" name="address" id="address" required />
+            <div class="input-texts" id="address-texts">
+              <label
+                for="address"
+                :class="emptyFields.includes('address') ? 'red-label' : ''"
+                >Your address</label
+              >
+              <p class="empty-message" v-if="emptyFields.includes('address')">
+                Field can't be empty
+              </p>
+            </div>
+
+            <input
+              type="text"
+              name="address"
+              id="address"
+              ref="address"
+              :class="emptyFields.includes('address') ? 'empty-border' : ''"
+              @click="wipeError('address')"
+              @change="wipeError('address')"
+            />
           </div>
           <div class="checkout__form__input__item">
-            <label for="zip">ZIP code</label>
-            <input type="text" pattern="[0-9]*" name="zip" id="zip" required />
+            <div class="input-texts">
+              <label
+                for="zip"
+                :class="emptyFields.includes('zip') ? 'red-label' : ''"
+                >ZIP code</label
+              >
+              <p class="empty-message" v-if="emptyFields.includes('zip')">
+                Field can't be empty
+              </p>
+            </div>
+
+            <input
+              type="text"
+              pattern="[0-9]*"
+              name="zip"
+              id="zip"
+              ref="zip"
+              :class="emptyFields.includes('zip') ? 'empty-border' : ''"
+              @click="wipeError('zip')"
+              @change="wipeError('zip')"
+            />
           </div>
           <div class="checkout__form__input__item no-margin">
-            <label for="city">City</label>
-            <input type="text" name="city" id="city" required />
+            <div class="input-texts">
+              <label
+                for="city"
+                :class="emptyFields.includes('city') ? 'red-label' : ''"
+                >City</label
+              >
+              <p class="empty-message" v-if="emptyFields.includes('city')">
+                Field can't be empty
+              </p>
+            </div>
+
+            <input
+              type="text"
+              name="city"
+              id="city"
+              ref="city"
+              :class="emptyFields.includes('city') ? 'empty-border' : ''"
+              @click="wipeError('city')"
+              @change="wipeError('city')"
+              spellcheck="false"
+            />
           </div>
           <div class="checkout__form__input__item">
-            <label for="country">Country</label>
-            <input type="text" name="country" id="country" required />
+            <div class="input-texts">
+              <label
+                for="country"
+                :class="emptyFields.includes('country') ? 'red-label' : ''"
+                >Country</label
+              >
+              <p class="empty-message" v-if="emptyFields.includes('country')">
+                Field can't be empty
+              </p>
+            </div>
+
+            <input
+              type="text"
+              name="country"
+              id="country"
+              ref="country"
+              :class="emptyFields.includes('country') ? 'empty-border' : ''"
+              @click="wipeError('country')"
+              @change="wipeError('country')"
+              spellcheck="false"
+            />
           </div>
         </section>
         <h2 class="checkout__form__input__subheading">Payment details</h2>
@@ -82,26 +214,54 @@
               </div>
             </div>
           </div>
-          <div
-            class="checkout__form__input__item"
-            v-show="picked === 'e-money'"
-          >
-            <label for="emoney-number" class="no-capitalize"
-              >e-Money Number</label
-            >
+          <div class="checkout__form__input__item" v-if="picked === 'e-money'">
+            <div class="input-texts">
+              <label for="emoney-number" class="no-capitalize"
+                >e-Money Number</label
+              >
+              <p
+                class="empty-message"
+                v-if="emptyFields.includes('emoney-number')"
+              >
+                Field can't be empty
+              </p>
+            </div>
+
             <input
               type="number"
               name="emoney-number"
               id="emoney-number"
-              required
+              ref="emoneyNumber"
+              :class="
+                emptyFields.includes('emoney-number') ? 'empty-border' : ''
+              "
+              @click="wipeError('emoney-number')"
+              @change="wipeError('emoney-number')"
             />
           </div>
           <div
             class="checkout__form__input__item no-margin"
-            v-show="picked === 'e-money'"
+            v-if="picked === 'e-money'"
           >
-            <label for="emoney-pin" class="no-capitalize">e-Money PIN</label>
-            <input type="number" name="emoney-pin" id="emoney-pin" required />
+            <div class="input-texts">
+              <label for="emoney-pin" class="no-capitalize">e-Money PIN</label>
+              <p
+                class="empty-message"
+                v-if="emptyFields.includes('emoney-pin')"
+              >
+                Field can't be empty
+              </p>
+            </div>
+
+            <input
+              type="number"
+              name="emoney-pin"
+              id="emoney-pin"
+              ref="emoneyPin"
+              :class="emptyFields.includes('emoney-pin') ? 'empty-border' : ''"
+              @click="wipeError('emoney-pin')"
+              @change="wipeError('emoney-pin')"
+            />
           </div>
           <div class="cash-info" v-show="picked === 'cash'">
             <i class="fas fa-money-bill-wave cash-info__icon"></i>
@@ -170,6 +330,8 @@ export default {
     return {
       picked: "e-money",
       shipping: 50,
+      emptyFields: [],
+      invalidEmail: false,
     };
   },
   methods: {
@@ -183,6 +345,50 @@ export default {
     },
     selectMethod(method) {
       this.picked = method;
+    },
+    submitHandler() {
+      const myRefs = [
+        this.$refs.name,
+        this.$refs.email,
+        this.$refs.phone,
+        this.$refs.address,
+        this.$refs.zip,
+        this.$refs.city,
+        this.$refs.country,
+      ];
+      const eMoneyRefs = [this.$refs.emoneyNumber, this.$refs.emoneyPin];
+      myRefs.map((ref) => {
+        if (ref.value === "") {
+          this.emptyFields.push(ref.name);
+        }
+      });
+      if (this.picked === "e-money") {
+        eMoneyRefs.map((ref) => {
+          if (ref.value === "") {
+            this.emptyFields.push(ref.name);
+          }
+        });
+      }
+      this.validateEmail();
+    },
+    wipeError(field) {
+      if (this.emptyFields.includes(field)) {
+        this.emptyFields = this.emptyFields.filter((ref) => ref !== field);
+      }
+      if (this.invalidEmail) {
+        this.invalidEmail = false;
+      }
+    },
+    validateEmail() {
+      const email = this.$refs.email.value;
+      const validationResult = email
+        .toLowerCase()
+        .match(
+          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+        );
+      if (!validationResult && !this.emptyFields.includes("email")) {
+        this.invalidEmail = true;
+      }
     },
   },
   created() {
@@ -236,6 +442,10 @@ input::-webkit-inner-spin-button {
     width: 111rem;
     padding-left: 1rem;
   }
+}
+
+.empty-border {
+  border: 0.2rem solid #ce382c !important;
 }
 
 .checkout {
@@ -367,9 +577,39 @@ input::-webkit-inner-spin-button {
           }
         }
 
+        .input-texts {
+          display: flex;
+          align-items: center;
+          width: 28rem;
+          justify-content: space-between;
+          margin-bottom: 0.9rem;
+
+          @media (min-width: 768px) {
+            width: 30.9rem;
+          }
+
+          .red-label {
+            color: rgba(205, 44, 44, 1) !important;
+          }
+
+          .empty-message {
+            text-align: right;
+            font-weight: 500;
+            font-size: 1.2rem;
+            line-height: 1.639rem;
+            letter-spacing: -0.021rem;
+            color: rgba(205, 44, 44, 1);
+          }
+        }
+
+        #address-texts {
+          @media (min-width: 768px) {
+            width: 63.4rem;
+          }
+        }
+
         label,
         .label {
-          margin-bottom: 0.9rem;
           font-weight: 700;
           font-size: 1.2rem;
           line-height: 1.639rem;
