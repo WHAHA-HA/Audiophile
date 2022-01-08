@@ -66,7 +66,7 @@ export default {
       return totalValue;
     },
     vat() {
-      return 0.2 * this.total;
+      return (0.2 * this.total).toFixed(2);
     },
   },
 };
@@ -86,6 +86,12 @@ export default {
     margin-bottom: 11.6rem;
   }
 
+  @media (min-width: 1205px) {
+    width: 35rem;
+    margin-top: 0;
+    height: 61.2rem;
+  }
+
   &__heading {
     text-transform: uppercase;
     font-weight: 700;
@@ -96,6 +102,31 @@ export default {
   }
 
   .products {
+    @media (min-width: 1205px) {
+      height: 24rem;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-right: 1rem;
+
+      &::-webkit-scrollbar {
+        width: 0.7rem;
+      }
+
+      &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 1rem;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: rgb(49, 49, 49);
+        border-radius: 1rem;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: black;
+      }
+    }
+
     &__item {
       display: flex;
       align-items: center;

@@ -245,6 +245,10 @@ main {
   display: block;
   cursor: pointer;
 
+  &:hover {
+    color: rgba(216, 125, 74, 1);
+  }
+
   @media (min-width: 768px) {
     margin-top: 3.3rem;
   }
