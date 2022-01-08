@@ -1,5 +1,6 @@
 <template>
   <Header @toggle-menu-show="$emit('toggle-menu-show', $event)" />
+  <Confirmation :cart="cart" :total="total + shipping" />
   <main class="checkout">
     <p class="back-link" @click="$router.back()">Go back</p>
     <form class="checkout__form" @submit.prevent="submitHandler" novalidate>
@@ -321,10 +322,11 @@
 
 <script>
 import Header from "../components/ProductPage/Header.vue";
+import Confirmation from "../components/Checkout/Confirmation.vue";
 
 export default {
   name: "Checkout",
-  components: { Header },
+  components: { Header, Confirmation },
   props: { cart: Array },
   data() {
     return {
