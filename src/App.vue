@@ -44,7 +44,7 @@ export default {
       showCart: false,
       showConfirmation: false,
       scrollTop: false,
-      cart: JSON.parse(localStorage.getItem("cart")),
+      cart: [],
       products: data,
     };
   },
@@ -108,9 +108,7 @@ export default {
     },
   },
   created() {
-    let storedCart = localStorage.getItem("cart");
-    storedCart = JSON.parse(storedCart);
-    if (!storedCart) {
+    if (localStorage.getItem("cart") === null) {
       localStorage.setItem("cart", JSON.stringify(this.cart));
     }
   },
