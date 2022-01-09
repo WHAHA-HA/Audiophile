@@ -320,7 +320,6 @@
           type="submit"
           :value="picked === 'e-money' ? 'Continue & pay' : 'Continue'"
           class="btn default-btn"
-          @click="$emit('toggle-menu-show', 'confirmation')"
         />
       </div>
     </form>
@@ -379,7 +378,20 @@ export default {
           }
         });
       }
+      if (this.picked === "cash") {
+        if (this.emptyFields.includes("emoney-number")) {
+          this.wipeError("emoney-number");
+        }
+        if (this.emptyFields.includes("emoney-pin")) {
+          this.wipeError("emoney-pin");
+        }
+      }
       this.validateEmail();
+      console.log(this.emptyFields);
+      console.log(this.invalidEmail);
+      if (this.emptyFields.length === 0 && !this.invalidEmail) {
+        this.$emit("toggle-menu-show", "confirmation");
+      }
     },
     wipeError(field) {
       if (this.emptyFields.includes(field)) {
