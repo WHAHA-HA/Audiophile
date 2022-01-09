@@ -38,6 +38,7 @@
       class="cart__router-link"
       to="/checkout"
       @click="$emit('toggle-menu-show', 'cart')"
+      v-if="cart.length > 0"
       ><button class="cart__router-link__btn default-btn">
         Checkout
       </button></router-link
