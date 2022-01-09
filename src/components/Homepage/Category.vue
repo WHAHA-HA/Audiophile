@@ -3,21 +3,21 @@
     <img
       v-if="product === 'headphones'"
       src="../../assets/shared/desktop/image-category-thumbnail-headphones.png"
-      alt=""
+      alt="headphones"
       class="category__thumbnail"
       id="headphones"
     />
     <img
       v-if="product === 'speakers'"
       src="../../assets/shared/desktop/image-category-thumbnail-speakers.png"
-      alt=""
+      alt="speakers"
       class="category__thumbnail"
       id="speakers"
     />
     <img
       v-if="product === 'earphones'"
       src="../../assets/shared/desktop/image-category-thumbnail-earphones.png"
-      alt=""
+      alt="earphones"
       class="category__thumbnail"
       id="earphones"
     />
@@ -30,7 +30,6 @@
       Shop
       <img
         src="../../assets/shared/desktop/icon-arrow-right.svg"
-        alt=""
         class="category__link__icon"
       />
     </router-link>

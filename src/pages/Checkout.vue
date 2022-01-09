@@ -285,7 +285,7 @@
         <div class="products">
           <div class="products__item" v-for="product in cart" :key="product.id">
             <div class="products__item__left">
-              <img :src="editSrc(product)" alt="" />
+              <img :src="editSrc(product)" :alt="product.name" />
               <div class="products__item__left__info">
                 <h4>
                   {{ product.slug.slice(0, product.slug.indexOf("-")) }}
@@ -387,8 +387,6 @@ export default {
         }
       }
       this.validateEmail();
-      console.log(this.emptyFields);
-      console.log(this.invalidEmail);
       if (this.emptyFields.length === 0 && !this.invalidEmail) {
         this.$emit("toggle-menu-show", "confirmation");
       }

@@ -66,7 +66,6 @@ export default {
       localStorage.setItem("cart", JSON.stringify(this.cart));
     },
     addToCart(data) {
-      console.log(data);
       let product = this.products.find(
         (product) => product.id === data.productId
       );
@@ -78,17 +77,14 @@ export default {
         };
       } else {
         product = { ...product, addedQuantity: data.addedQuantity };
-        console.log("product", product);
         this.cart.push(product);
       }
       this.storeCart();
     },
     changeQuantity(data) {
-      console.log("productId", data.productId);
       const index = this.cart.findIndex((prod) => prod.id === data.productId);
       if (data.operation === "subtract") {
         if (this.cart[index].addedQuantity === 1) {
-          console.log("hello");
           this.cart = this.cart
             .slice()
             .filter((prod) => prod.id !== data.productId);
@@ -114,7 +110,6 @@ export default {
   created() {
     let storedCart = localStorage.getItem("cart");
     storedCart = JSON.parse(storedCart);
-    console.log("storedCart", storedCart);
     if (!storedCart) {
       localStorage.setItem("cart", JSON.stringify(this.cart));
     }

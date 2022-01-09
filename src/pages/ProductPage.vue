@@ -3,7 +3,7 @@
   <main>
     <p class="back-link" @click="$router.back()">Go back</p>
     <section class="overview">
-      <img :src="editSrc" class="overview__image" />
+      <img :src="editSrc" :alt="currentProduct.name" class="overview__image" />
       <div class="overview__text">
         <p class="overview__text__tag" v-show="currentProduct.new">
           New product
@@ -73,11 +73,22 @@
     </section>
     <section class="gallery">
       <div class="gallery__left">
-        <img :src="gallerySrc('first')" alt="" class="gallery__left__first" />
-        <img :src="gallerySrc('second')" alt="" class="gallery__left__second" />
+        <img
+          :src="gallerySrc('first')"
+          :alt="`${currentProduct.name} presentation image`"
+          class="gallery__left__first"
+        />
+        <img
+          :src="gallerySrc('second')"
+          :alt="`${currentProduct.name} presentation image`"
+          class="gallery__left__second"
+        />
       </div>
       <div class="gallery__right">
-        <img :src="gallerySrc('third')" alt="" />
+        <img
+          :src="gallerySrc('third')"
+          :alt="`${currentProduct.name} presentation image`"
+        />
       </div>
     </section>
     <section class="others">

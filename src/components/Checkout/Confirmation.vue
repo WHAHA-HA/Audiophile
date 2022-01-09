@@ -21,7 +21,7 @@
             <div class="product__left">
               <img
                 :src="editSrc(product)"
-                alt=""
+                :alt="product.name"
                 class="product__left__image"
               />
               <div class="product__left__info">
@@ -95,9 +95,6 @@ export default {
     orderSelection() {
       return !this.showOrder ? [this.cart[0]] : this.cart;
     },
-  },
-  created() {
-    console.log("slug", this.cart[0].slug);
   },
 };
 </script>

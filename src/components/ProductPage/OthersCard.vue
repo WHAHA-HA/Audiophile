@@ -1,6 +1,6 @@
 <template>
   <article class="card">
-    <img :src="editSrc" alt="" class="card__image" />
+    <img :src="editSrc" :alt="product.name" class="card__image" />
     <h4 class="card__title">{{ product.name }}</h4>
     <router-link :to="`/product/${product.slug}`" @click="clickHandler">
       <button class="card__btn default-btn">See product</button>
