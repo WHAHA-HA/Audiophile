@@ -32,6 +32,7 @@ These are some of the features of my project:
 - Dynamic pages and components
 - Cart (adding/removing products)
 - Checkout form with form validation
+- Local storage
 
 ### Links
 
