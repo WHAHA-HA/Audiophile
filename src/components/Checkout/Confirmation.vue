@@ -8,29 +8,46 @@
     </p>
     <div class="confirmation__order">
       <div class="confirmation__order__left">
-        <div class="product">
-          <div class="product__left">
-            <img :src="editSrc(cart[0])" alt="" class="product__left__image" />
-            <div class="product__left__info">
-              <h2 class="product__left__info__name">
-                {{ editedSlug }}
-              </h2>
-              <p class="product__left__info__price">
-                $ {{ separator(cart[0].price) }}
-              </p>
+        <div class="product-container">
+          <div
+            class="product"
+            v-for="product in orderSelection"
+            :key="product.id"
+          >
+            <div class="product__left">
+              <img
+                :src="editSrc(product)"
+                alt=""
+                class="product__left__image"
+              />
+              <div class="product__left__info">
+                <h2 class="product__left__info__name">
+                  {{ editedSlug(product) }}
+                </h2>
+                <p class="product__left__info__price">
+                  $ {{ separator(product.price) }}
+                </p>
+              </div>
             </div>
+            <p class="product__quantity">x{{ product.addedQuantity }}</p>
           </div>
-          <p class="product__quantity">x{{ cart[0].addedQuantity }}</p>
         </div>
-        <p class="confirmation__order__left__rest">
-          and {{ cart.length - 1 }} other item(s)
-        </p>
+        <button
+          class="confirmation__order__left__rest"
+          @click="toggleShowOrder"
+        >
+          {{
+            !showOrder ? `and ${cart.length - 1} other items(s)` : "View less"
+          }}
+        </button>
       </div>
       <div class="confirmation__order__right">
-        <h2 class="confirmation__order__right__heading">Grand total</h2>
-        <p class="confirmation__order__right__total">
-          $ {{ separator(total) }}
-        </p>
+        <div class="confirmation__order__right__text">
+          <h2 class="confirmation__order__right__text__heading">Grand total</h2>
+          <p class="confirmation__order__right__text__total">
+            $ {{ separator(total) }}
+          </p>
+        </div>
       </div>
     </div>
     <router-link to="/" class="home-link">
@@ -43,6 +60,11 @@
 export default {
   name: "Confirmation",
   props: { cart: Array, total: Number },
+  data() {
+    return {
+      showOrder: false,
+    };
+  },
   methods: {
     editSrc(product) {
       return require(`../../${product.image.mobile.slice(2)}`);
@@ -52,10 +74,16 @@ export default {
       str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       return str.join(".");
     },
+    toggleShowOrder() {
+      this.showOrder = !this.showOrder;
+    },
+    editedSlug(product) {
+      return product.slug.slice(0, product.slug.indexOf("-"));
+    },
   },
   computed: {
-    editedSlug() {
-      return this.cart[0].slug.slice(0, this.cart[0].slug.indexOf("-"));
+    orderSelection() {
+      return !this.showOrder ? [this.cart[0]] : this.cart;
     },
   },
   created() {
@@ -145,11 +173,13 @@ export default {
       &__rest {
         margin-top: 1.2rem;
         color: #797979;
-        text-align: center;
         font-weight: 700;
         font-size: 1.2rem;
         line-height: 1.639rem;
         letter-spacing: -0.021rem;
+        border: none;
+        background: none;
+        width: 100%;
       }
     }
 
@@ -160,25 +190,54 @@ export default {
       @media (min-width: 768px) {
         width: 19.8rem;
         padding: 0;
-        padding-top: 4.1rem;
-        padding-left: 2.4rem;
+        position: relative;
       }
 
-      &__heading {
-        color: #808080;
-        font-weight: 500;
-        font-size: 1.5rem;
-        line-height: 2.5rem;
-        text-transform: uppercase;
-      }
+      &__text {
+        position: absolute;
+        bottom: 4.2rem;
+        margin-left: 2.4rem;
+        &__heading {
+          color: #808080;
+          font-weight: 500;
+          font-size: 1.5rem;
+          line-height: 2.5rem;
+          text-transform: uppercase;
+        }
 
-      &__total {
-        color: white;
-        margin-top: 0.8rem;
-        font-weight: 700;
-        font-size: 1.8rem;
-        line-height: 2.459rem;
+        &__total {
+          color: white;
+          margin-top: 0.8rem;
+          font-weight: 700;
+          font-size: 1.8rem;
+          line-height: 2.459rem;
+        }
       }
+    }
+  }
+
+  .product-container {
+    border-bottom: 0.1rem solid #dedede;
+    padding-bottom: 1.2rem;
+    max-height: 10rem;
+    overflow: auto;
+    padding-right: 1rem;
+    &::-webkit-scrollbar {
+      width: 0.7rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px grey;
+      border-radius: 1rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgb(49, 49, 49);
+      border-radius: 1rem;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: black;
     }
   }
 
@@ -186,8 +245,11 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 0.1rem solid #dedede;
-    padding-bottom: 1.2rem;
+    margin-bottom: 1.6rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     @media (min-width: 768px) {
       align-items: flex-start;
