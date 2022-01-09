@@ -32,10 +32,14 @@
             </button>
           </div>
           <button
-            class="overview__text__btn-section__btn default-btn"
+            :class="[
+              'overview__text__btn-section__btn',
+              'default-btn',
+              justAdded ? 'just-added' : '',
+            ]"
             @click="addToCartHandler"
           >
-            Add to cart
+            {{ justAdded ? "Added to cart" : "Add to cart" }}
           </button>
         </div>
       </div>
@@ -106,6 +110,7 @@ export default {
       total: 1,
       products: data,
       windowSize: null,
+      justAdded: false,
     };
   },
   methods: {
@@ -118,6 +123,7 @@ export default {
       }
     },
     addToCartHandler() {
+      this.justAdded = true;
       const data = {
         productId: this.currentProduct.id,
         addedQuantity: this.total,
@@ -126,6 +132,7 @@ export default {
     },
     resetTotal() {
       this.total = 1;
+      this.justAdded = false;
     },
     setWindowSize() {
       let windowWidth = window.innerWidth;
@@ -587,5 +594,9 @@ main {
       align-items: flex-start;
     }
   }
+}
+
+.just-added {
+  background: #f6af85;
 }
 </style>

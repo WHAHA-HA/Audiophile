@@ -12,11 +12,18 @@
     @empty-cart="emptyCart"
     @toggle-menu-show="toggleMenu"
   />
-  <div :class="['wrapper', showMenu || showCart ? 'stop-scroll' : '']">
+  <div
+    :class="[
+      'wrapper',
+      showMenu || showCart || showConfirmation ? 'stop-scroll' : '',
+    ]"
+  >
     <router-view
       @toggle-menu-show="toggleMenu"
       @add-to-cart="addToCart"
+      @empty-cart="emptyCart"
       :cart="cart"
+      :showConfirmation="showConfirmation"
     />
     <Footer />
   </div>
@@ -35,6 +42,7 @@ export default {
     return {
       showMenu: false,
       showCart: false,
+      showConfirmation: false,
       scrollTop: false,
       cart: JSON.parse(localStorage.getItem("cart")),
       products: data,
@@ -48,8 +56,9 @@ export default {
       } else if (myVar === "menu") {
         this.showMenu = !this.showMenu;
       } else if (myVar === "cart") {
-        console.log("hello");
         this.showCart = !this.showCart;
+      } else if (myVar === "confirmation") {
+        this.showConfirmation = !this.showConfirmation;
       }
       this.scrollTop = !this.scrollTop;
     },

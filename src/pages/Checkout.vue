@@ -1,6 +1,12 @@
 <template>
   <Header @toggle-menu-show="$emit('toggle-menu-show', $event)" />
-  <Confirmation :cart="cart" :total="total + shipping" />
+  <Confirmation
+    :cart="cart"
+    :total="total + shipping"
+    :showConfirmation="showConfirmation"
+    @toggle-menu-show="$emit('toggle-menu-show', $event)"
+    @empty-cart="$emit('empty-cart')"
+  />
   <main class="checkout">
     <p class="back-link" @click="$router.back()">Go back</p>
     <form class="checkout__form" @submit.prevent="submitHandler" novalidate>
@@ -314,6 +320,7 @@
           type="submit"
           :value="picked === 'e-money' ? 'Continue & pay' : 'Continue'"
           class="btn default-btn"
+          @click="$emit('toggle-menu-show', 'confirmation')"
         />
       </div>
     </form>
@@ -327,7 +334,8 @@ import Confirmation from "../components/Checkout/Confirmation.vue";
 export default {
   name: "Checkout",
   components: { Header, Confirmation },
-  props: { cart: Array },
+  props: { cart: Array, showConfirmation: Boolean },
+  emits: ["toggle-menu-show", "empty-cart"],
   data() {
     return {
       picked: "e-money",
@@ -392,9 +400,6 @@ export default {
         this.invalidEmail = true;
       }
     },
-  },
-  created() {
-    console.log("cart", this.cart);
   },
   computed: {
     total() {

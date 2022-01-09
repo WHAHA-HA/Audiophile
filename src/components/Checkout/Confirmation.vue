@@ -1,6 +1,10 @@
 <template>
-  <div class="overlay"></div>
-  <div class="confirmation">
+  <div
+    :class="['overlay', showConfirmation ? 'showElement' : 'hideElement']"
+  ></div>
+  <div
+    :class="['confirmation', showConfirmation ? 'showElement' : 'hideElement']"
+  >
     <i class="fas fa-check-circle confirmation__icon"></i>
     <h1 class="confirmation__heading">Thank you for your order</h1>
     <p class="confirmation__text">
@@ -8,7 +12,7 @@
     </p>
     <div class="confirmation__order">
       <div class="confirmation__order__left">
-        <div class="product-container">
+        <div class="product-container" v-if="cart.length > 0">
           <div
             class="product"
             v-for="product in orderSelection"
@@ -35,6 +39,7 @@
         <button
           class="confirmation__order__left__rest"
           @click="toggleShowOrder"
+          v-if="cart.length > 1"
         >
           {{
             !showOrder ? `and ${cart.length - 1} other items(s)` : "View less"
@@ -50,7 +55,7 @@
         </div>
       </div>
     </div>
-    <router-link to="/" class="home-link">
+    <router-link @click="goHomeHandler" to="/" class="home-link">
       <button class="home-link__btn default-btn">Back to home</button>
     </router-link>
   </div>
@@ -59,7 +64,8 @@
 <script>
 export default {
   name: "Confirmation",
-  props: { cart: Array, total: Number },
+  props: { cart: Array, total: Number, showConfirmation: Boolean },
+  emits: ["toggle-menu-show", "empty-cart"],
   data() {
     return {
       showOrder: false,
@@ -79,6 +85,10 @@ export default {
     },
     editedSlug(product) {
       return product.slug.slice(0, product.slug.indexOf("-"));
+    },
+    goHomeHandler() {
+      this.$emit("toggle-menu-show", "confirmation");
+      this.$emit("empty-cart");
     },
   },
   computed: {
@@ -180,6 +190,8 @@ export default {
         border: none;
         background: none;
         width: 100%;
+        border-top: 0.1rem solid #dedede;
+        padding-top: 1.2rem;
       }
     }
 
@@ -190,12 +202,11 @@ export default {
       @media (min-width: 768px) {
         width: 19.8rem;
         padding: 0;
-        position: relative;
+        display: flex;
+        align-items: center;
       }
 
       &__text {
-        position: absolute;
-        bottom: 4.2rem;
         margin-left: 2.4rem;
         &__heading {
           color: #808080;
@@ -217,8 +228,6 @@ export default {
   }
 
   .product-container {
-    border-bottom: 0.1rem solid #dedede;
-    padding-bottom: 1.2rem;
     max-height: 10rem;
     overflow: auto;
     padding-right: 1rem;
@@ -304,5 +313,13 @@ export default {
       }
     }
   }
+}
+
+.showElement {
+  display: block;
+}
+
+.hideElement {
+  display: none;
 }
 </style>
