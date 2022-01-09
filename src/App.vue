@@ -112,6 +112,9 @@ export default {
       localStorage.setItem("cart", JSON.stringify(this.cart));
     }
   },
+  mounted() {
+    this.cart = JSON.parse(localStorage.getItem("cart"));
+  },
 };
 </script>
 
