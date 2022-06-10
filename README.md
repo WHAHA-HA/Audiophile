@@ -1,6 +1,6 @@
 <h1 align="center">Audiophile - Vue.js E-commerce Multi-Page Website</h1>
 
-This is a project I built to familarize myself with Vue.js. It's my solution to the [Audiophile Frontend Mentor challenge](https://www.frontendmentor.io/challenges/audiophile-ecommerce-website-C8cuSd_wx). Figma design files were provided by Frontend Mentor.
+Figma design files were provided by Frontend Mentor.
 
 <p align="center"><img src="./public/presentation/preview1.png" alt="image preview of the Audiophile Homepage" align="center"><p>
 
@@ -60,5 +60,4 @@ I was also happy to practice my precision in building websites according to some
 
 ## Author
 
-- Website - [Sebastian-Radu Oarga](http://www.sebastianraduoarga.com)
-- LinkedIn - [Sebastian-Radu Oarga](https://www.linkedin.com/in/sebastianoarga/)
+Email: filiukbohdan123@gmail.com
